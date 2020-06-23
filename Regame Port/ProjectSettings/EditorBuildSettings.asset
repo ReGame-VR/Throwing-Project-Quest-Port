@@ -6,21 +6,21 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/TitleScreen.unity
+    path: Assets/Scenes/Regame/TitleScreen.unity
     guid: 702472127c52faa4c97831df3b9ca576
   - enabled: 1
-    path: Assets/Scenes/Calibration.unity
+    path: Assets/Scenes/Regame/Calibration.unity
     guid: 222baf0f52f936a4ea70f67fa479fdb4
   - enabled: 1
-    path: Assets/Scenes/Classroom.unity
+    path: Assets/Scenes/Regame/Classroom.unity
     guid: fc1dc3184b2b05240803d6e20e6c86a0
   - enabled: 1
-    path: Assets/Scenes/Park.unity
+    path: Assets/Scenes/Regame/Park.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   - enabled: 1
-    path: Assets/Scenes/Moon.unity
+    path: Assets/Scenes/Regame/Moon.unity
     guid: a9df58af1eff6a8428daed11016b226d
   - enabled: 1
-    path: Assets/Scenes/EndScreen.unity
+    path: Assets/Scenes/Regame/EndScreen.unity
     guid: bb306c18a39c9294a8c8014be879804d
   m_configObjects: {}
