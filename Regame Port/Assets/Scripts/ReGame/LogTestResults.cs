@@ -8,9 +8,15 @@ public class LogTestResults : MonoBehaviour
     // Path of file
     private string path;
 
+    //---------------Added-------------//
+    private GlobalControl globalControl;
+
     // Called on startup
     private void Start()
     {
+        //----------------Added-----------------//
+        globalControl = GameObject.Find("GlobalControl").GetComponent<GlobalControl>();
+
         // Set path of file 
         //FOR RIFT USE ONLY 
         //path = "Assets/Resources/ResultsLog.txt";
@@ -38,7 +44,27 @@ public class LogTestResults : MonoBehaviour
         CheckForFile();
 
         // Content to add
-        string content = "\nTest: " + System.DateTime.Now + "\n";
+        //string content = "\nTest: " + System.DateTime.Now + "\n";
+
+        string content = null;
+
+        switch (globalControl.progression)
+        {
+            case GlobalControl.ProgressionType.Choice:
+                content = "\nTest #C_" + globalControl.participantID + " " + System.DateTime.Now + "\n";
+                break;
+            case GlobalControl.ProgressionType.Performance:
+                content = "\nTest #P_" + globalControl.participantID + " " + System.DateTime.Now + "\n";
+                break;
+            case GlobalControl.ProgressionType.Random:
+                content = "\nTest #R_" + globalControl.participantID + " " + System.DateTime.Now + "\n";
+                break;
+            default:
+                break;
+        }
+
+        //Original format
+        //string content = "\nTest: " + globalControl.participantID + " " + System.DateTime.Now + "\n";
 
         // Add the message to the file
         File.AppendAllText(path, content);

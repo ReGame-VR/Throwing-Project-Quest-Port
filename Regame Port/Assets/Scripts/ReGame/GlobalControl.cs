@@ -1,5 +1,7 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -21,6 +23,9 @@ public class GlobalControl : MonoBehaviour
     // participant ID to differentiate logs
     public string participantID;
 
+    //ID number to increment on start
+    private int id = 0;
+
     // enum type(and instance) to differentiate different progression 
     public enum ProgressionType {Performance, Random, Choice};
     public ProgressionType progression;
@@ -37,7 +42,7 @@ public class GlobalControl : MonoBehaviour
     public static GlobalControl Instance;
 
     // Runs on startup
-    private void Awake()
+    public void Awake()
     {
         // If there is no Instance, makes this the Instance
         if (Instance == null)
@@ -49,7 +54,13 @@ public class GlobalControl : MonoBehaviour
         else if (Instance != this)
         {
             Destroy(gameObject);
-        }
+        } 
+    }
+
+    private void Start()
+    {
+        IncrementID();
+        //FlushIDSystem();
     }
 
     // Method for swapping scenes during Choice progression mode
@@ -71,4 +82,38 @@ public class GlobalControl : MonoBehaviour
                 break;
         }
     }
- }
+
+    public void IncrementID()
+    {
+        id = PlayerPrefs.GetInt("ID_Number");
+        id++;
+        PlayerPrefs.SetInt("ID_Number", id);
+
+        SetParticipantID(id);
+    }
+
+    public string ConvertIntToString(int num)
+    {
+        return num.ToString();
+    }
+
+    public void SetParticipantID(int id)
+    {
+        participantID = ConvertIntToString(id);
+    }
+
+    /**
+     * WARNING!!
+     * THIS METHOD FLUSHES ALL ID'S AND WILL
+     * DAMAGE THE UNIQUE ID SYSTEM THAT CORRELATES
+     * TO THE SAVED DATA. 
+     * 
+     * 
+     * With great power comes great responsibility.
+     *                         -Uncle Ben
+     */
+    private void FlushIDSystem()
+    {
+        PlayerPrefs.DeleteAll();
+    }
+}
