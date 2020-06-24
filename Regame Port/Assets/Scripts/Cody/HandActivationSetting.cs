@@ -6,6 +6,7 @@ public class HandActivationSetting : MonoBehaviour
 {
     public GlobalControl globalControl;
     public GameObject calibrationEnvironment;
+    public GameObject handInstructions;
 
     /**
      * Checking if player has put in there dominant hand.
@@ -29,8 +30,11 @@ public class HandActivationSetting : MonoBehaviour
     {
         //Turn on calibration scene when handedness has been set.
         calibrationEnvironment.SetActive(true);
+        handInstructions.SetActive(false);
+
 
         //Disable this gameobject since handedness has been chosen.
         this.gameObject.SetActive(false);
+
     }
 }
