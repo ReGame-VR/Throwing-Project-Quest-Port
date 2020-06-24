@@ -34,6 +34,25 @@ public class LevelHeightScale : MonoBehaviour
 
     void Awake()
     {
+        //Added the code below to start because of some variables in Global Control that need instantiation
+        //Variables were getting other variables before properly setting up
+
+        /*// Sets up starting values for calibration
+        startHeight = platform.transform.localScale.y;
+        startYposPlatform = platform.transform.position.y;
+        startZposField = targetField.transform.TransformPoint(Vector3.zero).z;
+        startZposObject = targetObj.transform.TransformPoint(Vector3.zero).z;
+        platformOffset = GlobalControl.Instance.platformOffset;
+        multiplier = GlobalControl.Instance.multiplier;
+        height = GlobalControl.Instance.height;
+        armLength = GlobalControl.Instance.armLength;
+        targetOffset = GlobalControl.Instance.targetOffset;
+        currScene = SceneManager.GetActiveScene();
+        hasFaded = false;*/
+    }
+    // Start is called before the first frame update
+    void Start()
+    {
         // Sets up starting values for calibration
         startHeight = platform.transform.localScale.y;
         startYposPlatform = platform.transform.position.y;
@@ -46,10 +65,7 @@ public class LevelHeightScale : MonoBehaviour
         targetOffset = GlobalControl.Instance.targetOffset;
         currScene = SceneManager.GetActiveScene();
         hasFaded = false;
-    }
-    // Start is called before the first frame update
-    void Start()
-    {
+
         // For setting up the scene during and post-calibration
         if (GlobalControl.Instance.isRightHanded)
         {
