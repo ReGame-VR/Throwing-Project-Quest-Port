@@ -18,6 +18,8 @@ public class ProgressionScoring : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (!GlobalControl.Instance) return;
+        
         // If on Random progression type, select a random value between 4 and 20 for total throws
         // the participant must complete
         if (GlobalControl.Instance.progression.Equals(GlobalControl.ProgressionType.Random))

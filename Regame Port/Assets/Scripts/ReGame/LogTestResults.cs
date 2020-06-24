@@ -14,8 +14,12 @@ public class LogTestResults : MonoBehaviour
     // Called on startup
     private void Start()
     {
+        var globalControlGameObject = GameObject.Find("GlobalControl");
+        
+        if (!globalControlGameObject) return;
+        
         //----------------Added-----------------//
-        globalControl = GameObject.Find("GlobalControl").GetComponent<GlobalControl>();
+        globalControl = globalControlGameObject.GetComponent<GlobalControl>();
 
         // Set path of file 
         //FOR RIFT USE ONLY 

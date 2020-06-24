@@ -58,6 +58,9 @@ public class LevelHeightScale : MonoBehaviour
         startYposPlatform = platform.transform.position.y;
         startZposField = targetField.transform.TransformPoint(Vector3.zero).z;
         startZposObject = targetObj.transform.TransformPoint(Vector3.zero).z;
+        
+        if (!GlobalControl.Instance) return;
+        
         platformOffset = GlobalControl.Instance.platformOffset;
         multiplier = GlobalControl.Instance.multiplier;
         height = GlobalControl.Instance.height;
@@ -87,6 +90,8 @@ public class LevelHeightScale : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!GlobalControl.Instance) return;
+        
         height = GlobalControl.Instance.height;
         armLength = GlobalControl.Instance.armLength;
 
