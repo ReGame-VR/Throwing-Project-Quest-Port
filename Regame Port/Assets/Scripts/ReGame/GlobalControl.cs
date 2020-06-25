@@ -20,6 +20,12 @@ public class GlobalControl : MonoBehaviour
     // boolean data collected in RecalibrateHeight.cs and the Calibration scene
     public bool isRightHanded;
 
+    //boolean to check if handedness has been chosen
+    public bool handCheck = false;
+
+    //boolean to check if handedness has been chosen
+    public bool hasWatchedInstructions = false;
+
     // participant ID to differentiate logs
     public string participantID;
 

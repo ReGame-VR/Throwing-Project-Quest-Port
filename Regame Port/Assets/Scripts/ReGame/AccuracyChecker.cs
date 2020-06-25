@@ -116,4 +116,9 @@ public class AccuracyChecker : MonoBehaviour
     {
         distanceFromTargetText = "Please throw the projectile to begin.";
     }
+
+    public int TotalThrows()
+    {
+        return numHit + numMiss;
+    }
 }
