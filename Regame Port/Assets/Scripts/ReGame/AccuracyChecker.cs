@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices.WindowsRuntime;
 using TMPro;
 using UnityEngine;
 
@@ -120,5 +121,11 @@ public class AccuracyChecker : MonoBehaviour
     public int TotalThrows()
     {
         return numHit + numMiss;
+    }
+
+    public void ResetTotalThrows()
+    {
+        numHit = 0;
+        numMiss = 0;
     }
 }

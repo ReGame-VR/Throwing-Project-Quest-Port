@@ -13,6 +13,7 @@ public class ButtonPressDetector : MonoBehaviour
     public Rigidbody buttonRigidbody;
     private float yStartPos;
     public string setLevel;
+    public LevelDifficulty levelDifficulty;
     
     // Start is called before the first frame update
     void Start()
@@ -45,24 +46,24 @@ public class ButtonPressDetector : MonoBehaviour
         switch (level)
         {
             case "one":
-                //Load level one
                 Debug.Log("Level one activated.");
+                levelDifficulty.one = true;
                 break;
             case "two":
-                //Load level two
                 Debug.Log("Level two activated.");
+                levelDifficulty.two = true;
                 break;
             case "three":
-                //Load level three
                 Debug.Log("Level three activated.");
+                levelDifficulty.three = true;
                 break;
             case "four":
-                //Load level four
                 Debug.Log("Level four activated.");
+                levelDifficulty.four = true;
                 break;
             case "five":
-                //Load level five
                 Debug.Log("Level five activated.");
+                levelDifficulty.five = true;
                 break;
             default:
                 break;

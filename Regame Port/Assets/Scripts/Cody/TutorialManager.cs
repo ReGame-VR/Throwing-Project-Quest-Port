@@ -15,11 +15,13 @@ public class TutorialManager : MonoBehaviour
     public GameObject heightCalibration;
     public GameObject levelScaler;
     public bool hasCalibrated = false;
+    public bool hasCompletedLevelPractice = false;
     public GameObject target;
     public AccuracyChecker accuracyChecker;
     public GameObject throwCounter;
     public TextMeshProUGUI throwCounterUI;
     public int totalPracticeThrows = 10;
+    public LevelDifficulty levelDifficulty;
 
     // Update is called once per frame
     void Update()
@@ -56,12 +58,50 @@ public class TutorialManager : MonoBehaviour
             if(total == totalPracticeThrows)
             {
                 hasCompletedPractice = true;
+                accuracyChecker.ResetTotalThrows();
             }
-
             if (total <= totalPracticeThrows)
             {
                 int throwsLeft = totalPracticeThrows - total;
                 throwCounterUI.text = throwsLeft.ToString();
+            }
+        }
+
+        if (globalControl.handCheck && globalControl.hasWatchedInstructions && globalControl.hasCalibrated && hasCompletedPractice && !hasCompletedLevelPractice)
+        {
+            int total = accuracyChecker.TotalThrows();
+            int throwsLeft = totalPracticeThrows - total;
+            instructionsText.text = "Now lets practice throwing with differnt levels. Goodluck!";
+            throwCounterUI.text = throwsLeft.ToString();
+
+            if (throwsLeft <= totalPracticeThrows && throwsLeft > totalPracticeThrows - 2 && !levelDifficulty.one)
+            {
+                levelDifficulty.LevelOne();
+                levelDifficulty.one = true;
+            }
+            if (throwsLeft <= totalPracticeThrows - 2 && throwsLeft > totalPracticeThrows - 4 && !levelDifficulty.two)
+            {
+                levelDifficulty.LevelTwo();
+                levelDifficulty.two = true;
+            }
+            if (throwsLeft <= totalPracticeThrows - 4 && throwsLeft > totalPracticeThrows - 6 && !levelDifficulty.three)
+            {
+                levelDifficulty.LevelThree();
+                levelDifficulty.three = true;
+            }
+            if (throwsLeft <= totalPracticeThrows - 6 && throwsLeft > totalPracticeThrows - 8 && !levelDifficulty.four)
+            {
+                levelDifficulty.LevelFour();
+                levelDifficulty.four = true;
+            }
+            if (throwsLeft <= totalPracticeThrows - 8 && throwsLeft > totalPracticeThrows - 10 && !levelDifficulty.five)
+            {
+                levelDifficulty.LevelFive();
+                levelDifficulty.five = true;
+            }
+            if(total == totalPracticeThrows)
+            {
+                hasCompletedLevelPractice = true;
             }
         }
     }

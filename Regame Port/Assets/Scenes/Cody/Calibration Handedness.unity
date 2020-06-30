@@ -505,7 +505,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &210064931
 Transform:
   m_ObjectHideFlags: 0
@@ -538,7 +538,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &221726937
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -551,10 +551,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc5f65ffe0c4f7040aa1c723498bc715, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
+  target: {fileID: 1631896756}
+  calibratedTargetPos: {x: 0, y: 0, z: 0}
   objectToThrow: {fileID: 0}
-  AdjustableTargetPercent: 1
-  AdjustableObjectPercent: 1
+  obstaclePrefab: {fileID: 2625903779349651749, guid: 2ed06816628891a45a808c0ff29ff1e2,
+    type: 3}
+  obstacleLocation: {fileID: 687096303}
+  startPos: {fileID: 0}
+  endPos: {fileID: 0}
+  AdjustableTargetPercent: 2
+  AdjustableObjectPercent: 0.5
+  obstacleSpeed: 1
+  one: 0
+  two: 0
+  three: 0
+  four: 0
+  five: 0
 --- !u!4 &221726938
 Transform:
   m_ObjectHideFlags: 0
@@ -720,6 +732,7 @@ MonoBehaviour:
   audioSource: {fileID: 331906578}
   buttonRigidbody: {fileID: 331906573}
   setLevel: 
+  levelDifficulty: {fileID: 0}
 --- !u!82 &331906578
 AudioSource:
   m_ObjectHideFlags: 0
@@ -967,6 +980,7 @@ MonoBehaviour:
   audioSource: {fileID: 350719992}
   buttonRigidbody: {fileID: 350719987}
   setLevel: 
+  levelDifficulty: {fileID: 0}
 --- !u!82 &350719992
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1440,7 +1454,7 @@ GameObject:
   - component: {fileID: 523388160}
   - component: {fileID: 523388159}
   - component: {fileID: 523388158}
-  m_Layer: 11
+  m_Layer: 12
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2001,6 +2015,36 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &687096302
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 687096303}
+  m_Layer: 0
+  m_Name: Obstacle Spawn Location
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &687096303
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 687096302}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.229, y: -0.188, z: 1.671}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &717877834
 GameObject:
@@ -3183,6 +3227,7 @@ MonoBehaviour:
   audioSource: {fileID: 1039061115}
   buttonRigidbody: {fileID: 1039061110}
   setLevel: 
+  levelDifficulty: {fileID: 0}
 --- !u!82 &1039061115
 AudioSource:
   m_ObjectHideFlags: 0
@@ -3863,6 +3908,7 @@ MonoBehaviour:
   audioSource: {fileID: 1096812411}
   buttonRigidbody: {fileID: 1096812409}
   setLevel: 
+  levelDifficulty: {fileID: 0}
 --- !u!82 &1096812411
 AudioSource:
   m_ObjectHideFlags: 0
@@ -4787,11 +4833,13 @@ MonoBehaviour:
   heightCalibration: {fileID: 1892657897}
   levelScaler: {fileID: 1467192584}
   hasCalibrated: 0
+  hasCompletedLevelPractice: 0
   target: {fileID: 1631896756}
   accuracyChecker: {fileID: 1053176286}
   throwCounter: {fileID: 1607603776}
   throwCounterUI: {fileID: 760123409}
-  totalPracticeThrows: 5
+  totalPracticeThrows: 10
+  levelDifficulty: {fileID: 221726937}
 --- !u!4 &1235600925
 Transform:
   m_ObjectHideFlags: 0
@@ -4830,7 +4878,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1256379181
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4957,7 +5005,7 @@ GameObject:
   - component: {fileID: 1260399888}
   - component: {fileID: 1260399887}
   - component: {fileID: 1260399886}
-  m_Layer: 11
+  m_Layer: 12
   m_Name: Cube (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7277,6 +7325,7 @@ MonoBehaviour:
   audioSource: {fileID: 1948236772}
   buttonRigidbody: {fileID: 1948236767}
   setLevel: 
+  levelDifficulty: {fileID: 0}
 --- !u!82 &1948236772
 AudioSource:
   m_ObjectHideFlags: 0
