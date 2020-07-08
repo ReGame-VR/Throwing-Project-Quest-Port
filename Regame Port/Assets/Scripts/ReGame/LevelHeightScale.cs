@@ -31,6 +31,12 @@ public class LevelHeightScale : MonoBehaviour
     private bool hasFaded;
     // Gameobject to control screenfades
     public GameObject screenFade;
+    //Check for Tutorial Completion
+    public TutorialManager tutorialManager;
+    public bool hasCompletedTutorial = false;
+    public bool fadeIntoClass = false;
+    public GameObject classroom;
+    public GameObject GameplayManager;
 
     void Awake()
     {
@@ -90,11 +96,22 @@ public class LevelHeightScale : MonoBehaviour
         height = GlobalControl.Instance.height;
         armLength = GlobalControl.Instance.armLength;
 
-        if (GlobalControl.Instance.hasCalibrated && !hasFaded &&
+        //Original Code for changing scene from calibration
+        //Added below was additional check for tutorial completion
+/*        if (GlobalControl.Instance.hasCalibrated && !hasFaded &&
             (OVRInput.GetUp(OVRInput.RawButton.X) || Input.GetKeyUp(KeyCode.KeypadEnter)))
         {
             hasFaded = true;
             LoadSceneHelper();
+        }*/
+
+        if (GlobalControl.Instance.hasCalibrated && !hasFaded && tutorialManager.hasCompletedTutorial)
+        {
+            hasFaded = true;
+            LoadSceneHelper();
+            screenFade.SetActive(false);
+            classroom.SetActive(true);
+            GameplayManager.SetActive(true);
         }
     }
 
@@ -141,7 +158,7 @@ public class LevelHeightScale : MonoBehaviour
 
         if (fadeScript)
             yield return new WaitForSeconds(fadeScript.fadeTime);
-        LoadNextScene();
+        
     }
 
     // Function that can be publicly called to run Fade()

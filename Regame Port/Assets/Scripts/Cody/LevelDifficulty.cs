@@ -21,13 +21,19 @@ public class LevelDifficulty : MonoBehaviour
     public float AdjustableTargetPercent = 2.0f;
     public float AdjustableObjectPercent = 1f;
     public float obstacleSpeed = 1.0f;
+    public GlobalControl globalControl;
+    public bool hasRecievedBaseline = false;
+    private GameObject obstacle;
 
-    [Header("Bools for levels. [Read Only]")]
-    public bool one = false;
-    public bool two = false;
-    public bool three = false;
-    public bool four = false;
-    public bool five = false;
+
+    private void Update()
+    {
+        if (globalControl.hasCalibrated && !hasRecievedBaseline)
+        {
+            calibratedTargetPos = target.transform.position;
+            hasRecievedBaseline = true;
+        }
+    }
 
     public void MoveTarget()
     {
@@ -46,7 +52,15 @@ public class LevelDifficulty : MonoBehaviour
 
     public void SpawnObstacle()
     {
-        Instantiate(obstaclePrefab, obstacleLocation);
+        obstacle = Instantiate(obstaclePrefab, obstacleLocation);
+    }
+
+    public void DestroyObstacle()
+    {
+        if(obstacle != null)
+        {
+            Destroy(obstacle);
+        }
     }
 
     public void MoveObstacle()
@@ -56,13 +70,15 @@ public class LevelDifficulty : MonoBehaviour
 
     public void LevelOne()
     {
-        //level one which is current target adjustment based off of height.
-        //getting calibrated target position for a reference for other levels.
-        calibratedTargetPos = target.transform.position;
+        ResetTargetPosition();
+        ResetTargetSize();
     }
 
     public void LevelTwo()
     {
+        ResetTargetPosition();
+        ResetTargetSize();
+
         MoveTarget();
     }
 
@@ -71,7 +87,7 @@ public class LevelDifficulty : MonoBehaviour
         ResetTargetPosition();
         ResetTargetSize();
 
-        AdjustTargetSize(.50f);
+        AdjustTargetSize(AdjustableObjectPercent);
     }
 
     public void LevelFour()
@@ -81,7 +97,7 @@ public class LevelDifficulty : MonoBehaviour
         ResetTargetSize();
 
         MoveTarget();
-        AdjustTargetSize(.50f);
+        AdjustTargetSize(AdjustableObjectPercent);
     }
 
     public void LevelFive()
@@ -90,7 +106,7 @@ public class LevelDifficulty : MonoBehaviour
         ResetTargetSize();
 
         MoveTarget();
-        AdjustTargetSize(.50f);
+        AdjustTargetSize(AdjustableObjectPercent);
         SpawnObstacle();
     }
 
@@ -103,5 +119,12 @@ public class LevelDifficulty : MonoBehaviour
     public void ResetTargetSize()
     {
         target.transform.localScale = Vector3.one * 1f;
+    }
+
+    public void FullReset()
+    {
+        ResetTargetPosition();
+        ResetTargetSize();
+        DestroyObstacle();
     }
 }

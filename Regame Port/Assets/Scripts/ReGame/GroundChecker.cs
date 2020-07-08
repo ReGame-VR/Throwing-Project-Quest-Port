@@ -18,6 +18,7 @@ public class GroundChecker : MonoBehaviour
     //private bool tracking;
     public bool tracking;
 
+
     // Start is called before the first frame update
     void Start()
     {

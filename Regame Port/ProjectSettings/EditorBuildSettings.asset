@@ -23,4 +23,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Regame/EndScreen.unity
     guid: bb306c18a39c9294a8c8014be879804d
+  - enabled: 1
+    path: Assets/Scenes/Cody/QuestClassRoom.unity
+    guid: 544859e5b7d5c6a4db76e9ca9f492bd7
   m_configObjects: {}

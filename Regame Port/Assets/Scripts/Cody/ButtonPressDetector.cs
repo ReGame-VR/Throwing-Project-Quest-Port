@@ -1,5 +1,4 @@
-﻿using JetBrains.Annotations;
-using Oculus.Platform;
+﻿using Oculus.Platform;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,7 +13,13 @@ public class ButtonPressDetector : MonoBehaviour
     private float yStartPos;
     public string setLevel;
     public LevelDifficulty levelDifficulty;
-    
+    public GameObject target;
+    public GameObject targetParent;
+    public GameObject platform;
+    public Material buttonMaterial;
+    public bool colorChanged = false;
+    public GameObject buttonPanel;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -38,6 +43,10 @@ public class ButtonPressDetector : MonoBehaviour
             audioSource.Play();
             buttonRigidbody.constraints = RigidbodyConstraints.FreezeAll;
             LevelSelection(setLevel);
+            buttonPanel.SetActive(false);
+            targetParent.SetActive(true);
+            platform.SetActive(true);
+            SwapColorToTarget();
         }
     }
 
@@ -47,26 +56,40 @@ public class ButtonPressDetector : MonoBehaviour
         {
             case "one":
                 Debug.Log("Level one activated.");
-                levelDifficulty.one = true;
+                levelDifficulty.LevelOne();
                 break;
             case "two":
                 Debug.Log("Level two activated.");
-                levelDifficulty.two = true;
+                levelDifficulty.LevelTwo();
                 break;
             case "three":
                 Debug.Log("Level three activated.");
-                levelDifficulty.three = true;
+                levelDifficulty.LevelThree();
                 break;
             case "four":
                 Debug.Log("Level four activated.");
-                levelDifficulty.four = true;
+                levelDifficulty.LevelFour();
                 break;
             case "five":
                 Debug.Log("Level five activated.");
-                levelDifficulty.five = true;
+                levelDifficulty.LevelFive();
                 break;
             default:
                 break;
+        }
+    }
+
+    public void SwapColorToTarget()
+    {
+        if (!colorChanged)
+        {
+            MeshRenderer meshRenderer = target.GetComponent<MeshRenderer>();
+            // Get the current material applied on the GameObject
+            Material oldMaterial = meshRenderer.material;
+            Debug.Log("Applied Material: " + oldMaterial.name);
+            // Set the new material on the GameObject
+            meshRenderer.material = buttonMaterial;
+            colorChanged = true;
         }
     }
 }
