@@ -19,6 +19,12 @@ public class Gameplay : MonoBehaviour
     public int buttonsPressedTotal;
     public bool levelActivated = false;
     public LevelDifficulty levelDifficulty;
+    public GameObject gameplayPanel;
+    public GameObject percentagePanel;
+    public TextMeshProUGUI percentageText;
+    public float completionPercent;
+    public bool levelComplete = false;
+    public ProjectileManager pm;
 
 
     // Start is called before the first frame update
@@ -60,8 +66,14 @@ public class Gameplay : MonoBehaviour
         target.SetActive(false);
         platform.SetActive(false);
         levelDifficulty.DestroyObstacle();
-        buttonPanel.SetActive(true);
+        //buttonPanel.SetActive(true);
+        //Pop up instructions to talk with instructor
+        gameplayPanel.SetActive(true);
+        percentagePanel.SetActive(true);
+        GetAccuracvPercentage();
+        percentageText.text = completionPercent.ToString() + "%";
         accuracyChecker.ResetTotalThrows();
+        pm.buttonActivator = false;
     }
 
     public int NumLevelsCompleted()
@@ -84,5 +96,11 @@ public class Gameplay : MonoBehaviour
             return true;
         }
         return false;
+    }
+
+    public void GetAccuracvPercentage()
+    {
+        completionPercent = accuracyChecker.PercentageOfSuccess();
+        completionPercent *= 100.0f;
     }
 }

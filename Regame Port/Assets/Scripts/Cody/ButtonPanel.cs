@@ -12,12 +12,13 @@ public class ButtonPanel : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        levels = RandomizeList(levels);
-        ChangeNameOfObjects(levels);
-        AssignLevelsToButtons(buttons, levels);
+        //levels = RandomizeList(levels);
+        //ChangeNameOfObjects(levels);
+        //AssignLevelsToButtons(buttons, levels);
     }
 
-    //Randomizes levels for buttons
+    
+    //Randomizes levels for buttons. NOT USED
     public List<string> RandomizeList(List<string> list)
     {
         for (int i = 0; i < list.Count; i++)
@@ -31,6 +32,7 @@ public class ButtonPanel : MonoBehaviour
         return list;
     }
 
+    //Assigning levels to buttons. NOT USED
     public void AssignLevelsToButtons(List<GameObject> buttons, List<string> randomizedList)
     {
         for(int i = 0; i < buttonMap.Count; i++)
@@ -39,6 +41,7 @@ public class ButtonPanel : MonoBehaviour
         }
     }
 
+    //Change level names. NOT USED
     public void ChangeNameOfObjects(List<string> list)
     {
         for (int i = 0; i < buttons.Count; i++)

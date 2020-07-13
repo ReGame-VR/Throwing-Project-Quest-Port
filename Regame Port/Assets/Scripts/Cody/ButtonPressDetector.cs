@@ -19,6 +19,10 @@ public class ButtonPressDetector : MonoBehaviour
     public Material buttonMaterial;
     public bool colorChanged = false;
     public GameObject buttonPanel;
+    public GameObject walls;
+    public AccuracyChecker accuracyChecker;
+    public Gameplay gameplay;
+    public ProjectileManager pm;
 
     // Start is called before the first frame update
     void Start()
@@ -42,11 +46,15 @@ public class ButtonPressDetector : MonoBehaviour
             buttonActivated = true;
             audioSource.Play();
             buttonRigidbody.constraints = RigidbodyConstraints.FreezeAll;
-            LevelSelection(setLevel);
+            LevelSelection(this.gameObject.name);
             buttonPanel.SetActive(false);
-            targetParent.SetActive(true);
+            target.SetActive(true);
             platform.SetActive(true);
-            SwapColorToTarget();
+            SwapColor(target, buttonMaterial);
+            SwapColor(walls, buttonMaterial);
+            SwapColor(platform, buttonMaterial);
+            accuracyChecker.ResetTotalThrows();
+            pm.buttonActivator = true;
         }
     }
 
@@ -79,17 +87,13 @@ public class ButtonPressDetector : MonoBehaviour
         }
     }
 
-    public void SwapColorToTarget()
+    public void SwapColor(GameObject objectToChange, Material newMat)
     {
-        if (!colorChanged)
-        {
-            MeshRenderer meshRenderer = target.GetComponent<MeshRenderer>();
-            // Get the current material applied on the GameObject
-            Material oldMaterial = meshRenderer.material;
-            Debug.Log("Applied Material: " + oldMaterial.name);
-            // Set the new material on the GameObject
-            meshRenderer.material = buttonMaterial;
-            colorChanged = true;
-        }
+        MeshRenderer meshRenderer = objectToChange.GetComponent<MeshRenderer>();
+        // Get the current material applied on the GameObject
+        Material oldMaterial = meshRenderer.material;
+        Debug.Log("Applied Material: " + oldMaterial.name);
+        // Set the new material on the GameObject
+        meshRenderer.material = newMat;
     }
 }

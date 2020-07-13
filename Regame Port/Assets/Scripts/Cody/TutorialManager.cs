@@ -66,6 +66,10 @@ public class TutorialManager : MonoBehaviour
             {
                 hasCompletedPractice = true;
                 accuracyChecker.ResetTotalThrows();
+
+                hasCompletedTutorial = true;
+                levelDifficulty.FullReset();
+                this.gameObject.SetActive(false);
             }
             if (total <= totalPracticeThrows)
             {
@@ -74,44 +78,45 @@ public class TutorialManager : MonoBehaviour
             }
         }
 
-        if (globalControl.handCheck && globalControl.hasWatchedInstructions && globalControl.hasCalibrated && hasCompletedPractice && !hasCompletedTutorial)
-        {
-            int total = accuracyChecker.TotalThrows();
-            int throwsLeft = totalPracticeThrows - total;
-            instructionsText.text = "Now lets practice throwing with differnt levels. Goodluck!";
-            throwCounterUI.text = throwsLeft.ToString();
+        /*        if (globalControl.handCheck && globalControl.hasWatchedInstructions && globalControl.hasCalibrated && hasCompletedPractice && !hasCompletedTutorial)
+                {
+                    int total = accuracyChecker.TotalThrows();
+                    int throwsLeft = totalPracticeThrows - total;
+                    instructionsText.text = "Now lets practice throwing with differnt levels. Goodluck!";
+                    throwCounterUI.text = throwsLeft.ToString();
 
-            if (throwsLeft <= totalPracticeThrows && throwsLeft > totalPracticeThrows - 2 && !one)
-            {
-                levelDifficulty.LevelOne();
-                one = true;
-            }
-            if (throwsLeft <= totalPracticeThrows - 2 && throwsLeft > totalPracticeThrows - 4 && !two)
-            {
-                levelDifficulty.LevelTwo();
-                two = true;
-            }
-            if (throwsLeft <= totalPracticeThrows - 4 && throwsLeft > totalPracticeThrows - 6 && !three)
-            {
-                levelDifficulty.LevelThree();
-                three = true;
-            }
-            if (throwsLeft <= totalPracticeThrows - 6 && throwsLeft > totalPracticeThrows - 8 && !four)
-            {
-                levelDifficulty.LevelFour();
-                four = true;
-            }
-            if (throwsLeft <= totalPracticeThrows - 8 && throwsLeft > totalPracticeThrows - 10 && !five)
-            {
-                levelDifficulty.LevelFive();
-                five = true;
-            }
-            if(total == totalPracticeThrows)
-            {
-                hasCompletedTutorial = true;
-                levelDifficulty.FullReset();
-                this.gameObject.SetActive(false);
-            }
-        }
+                    if (throwsLeft <= totalPracticeThrows && throwsLeft > totalPracticeThrows - 2 && !one)
+                    {
+                        levelDifficulty.LevelOne();
+                        one = true;
+                    }
+                    if (throwsLeft <= totalPracticeThrows - 2 && throwsLeft > totalPracticeThrows - 4 && !two)
+                    {
+                        levelDifficulty.LevelTwo();
+                        two = true;
+                    }
+                    if (throwsLeft <= totalPracticeThrows - 4 && throwsLeft > totalPracticeThrows - 6 && !three)
+                    {
+                        levelDifficulty.LevelThree();
+                        three = true;
+                    }
+                    if (throwsLeft <= totalPracticeThrows - 6 && throwsLeft > totalPracticeThrows - 8 && !four)
+                    {
+                        levelDifficulty.LevelFour();
+                        four = true;
+                    }
+                    if (throwsLeft <= totalPracticeThrows - 8 && throwsLeft > totalPracticeThrows - 10 && !five)
+                    {
+                        levelDifficulty.LevelFive();
+                        five = true;
+                    }
+                    if(total == totalPracticeThrows)
+                    {
+                        hasCompletedTutorial = true;
+                        levelDifficulty.FullReset();
+                        this.gameObject.SetActive(false);
+                    }
+                }
+                */
     }
 }

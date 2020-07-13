@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Oculus.Platform;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -12,8 +13,8 @@ using UnityEngine;
 public class AccuracyChecker : MonoBehaviour
 {
     // int values to track how many times a projectile designed for this target has hit this target or has missed
-    private int numHit;
-    private int numMiss;
+    public int numHit;
+    public int numMiss;
     // Float value to track how far away the projectile landed from the target, in the event of a miss
     private float distAway;
     // References to TextMeshPro objects used to display above the target how many times it's been hit, missed, 
@@ -127,5 +128,10 @@ public class AccuracyChecker : MonoBehaviour
     {
         numHit = 0;
         numMiss = 0;
+    }
+
+    public float PercentageOfSuccess()
+    {
+        return (float)numHit / (float)(numHit + numMiss);
     }
 }

@@ -16,6 +16,7 @@ public class ProjectileManager : MonoBehaviour
     //public TextMeshProUGUI distAwayText;
     // Reference to LogManager object in scene
     public GameObject logManager;
+    public bool buttonActivator = true;
 
     // Start is called before the first frame update
     void Start()
@@ -44,7 +45,7 @@ public class ProjectileManager : MonoBehaviour
     void Update()
     {
         // When the player presses the "A" button on the right hand controller
-        if (OVRInput.GetUp(OVRInput.RawButton.A))
+        if (OVRInput.GetUp(OVRInput.RawButton.A) && buttonActivator)
         {
             Debug.Log("Player reset");
             // Call the ResetPositions() function
