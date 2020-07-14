@@ -47,6 +47,7 @@ public class GlobalControl : MonoBehaviour
     // Single instance of this class
     public static GlobalControl Instance;
 
+
     // Runs on startup
     public void Awake()
     {
@@ -60,12 +61,14 @@ public class GlobalControl : MonoBehaviour
         else if (Instance != this)
         {
             Destroy(gameObject);
-        } 
+        }
+
+        IncrementID();
     }
 
     private void Start()
     {
-        IncrementID();
+        
         //FlushIDSystem();
     }
 

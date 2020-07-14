@@ -17,6 +17,8 @@ public class GroundChecker : MonoBehaviour
     // same toss by traveling through the target-area trigger into the ground and qualifying as a miss.
     //private bool tracking;
     public bool tracking;
+    public ProjectileManager projectileManager;
+    public OVRGrabbable grabbable;
 
 
     // Start is called before the first frame update
@@ -28,6 +30,8 @@ public class GroundChecker : MonoBehaviour
         target = GameObject.FindGameObjectWithTag("Target");
         // Finds progressionScore
         progressionScore = GameObject.Find("ProgressionScorer");
+
+        projectileManager = GameObject.Find("ProjectileManager").GetComponent<ProjectileManager>();
     }
 
     // When the projectile comes in contact with another collider
@@ -49,6 +53,7 @@ public class GroundChecker : MonoBehaviour
             tracking = false;
         }
     }
+
 
     // Function to let other scripts see if the projectile is still being tracked
     public bool GetTracking()

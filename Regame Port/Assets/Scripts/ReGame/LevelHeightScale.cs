@@ -79,15 +79,15 @@ public class LevelHeightScale : MonoBehaviour
         }
         AdjustPlatform();
         AdjustTarget();
-        if (!currScene.name.Equals("Calibration"))
+/*        if (!currScene.name.Equals("Calibration"))
         {
-            SpawnProjectile();
+            //SpawnProjectile();
         }
         if (GlobalControl.Instance.progression.Equals(GlobalControl.ProgressionType.Choice))
         {
             GlobalControl.Instance.nextScene = GlobalControl.Scene.Classroom;
         }
-        nextSceneIndex = currScene.buildIndex + 1;
+        nextSceneIndex = currScene.buildIndex + 1;*/
     }
 
     // Update is called once per frame

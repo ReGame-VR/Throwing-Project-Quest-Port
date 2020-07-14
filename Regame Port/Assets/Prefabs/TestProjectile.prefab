@@ -143,3 +143,5 @@ MonoBehaviour:
   target: {fileID: 0}
   progressionScore: {fileID: 0}
   tracking: 0
+  projectileManager: {fileID: 0}
+  grabbable: {fileID: 397583482633400333}

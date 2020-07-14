@@ -79,6 +79,24 @@ public class ProjectileManager : MonoBehaviour
             projectiles[i].GetComponent<GroundChecker>().target.SendMessage("ResetDistText");
         }
         // Add reset data to result text file
-        logManager.GetComponent<LogTestResults>().AddText("Reset for next throw.");
+        //logManager.GetComponent<LogTestResults>().AddText("Reset for next throw.");
+    }
+
+    public void ProjectileSwitch(bool isOn)
+    {
+        if (isOn)
+        {
+            for (int i = 0; i < projectiles.Length; i++)
+            {
+                projectiles[i].SetActive(true);
+            }
+        }
+        else
+        {
+            for (int i = 0; i < projectiles.Length; i++)
+            {
+                projectiles[i].SetActive(false);
+            }
+        }
     }
 }

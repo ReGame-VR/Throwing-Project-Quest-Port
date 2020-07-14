@@ -34,7 +34,7 @@ public class AccuracyChecker : MonoBehaviour
     // Sound effects
     AudioSource successAudio;
     AudioSource missAudio;
-
+    public ProjectileManager projectileManager;
 
     // Start is called before the first frame update
     void Start()
@@ -92,6 +92,9 @@ public class AccuracyChecker : MonoBehaviour
             // Add hit data to result text file
             if (logManager)
                 logManager.GetComponent<LogTestResults>()?.AddText(other.gameObject.name + " successfully hit " + this.name + ".");
+
+
+            Debug.Log("LANDED AS HIT");
         }
     }
 
@@ -110,7 +113,9 @@ public class AccuracyChecker : MonoBehaviour
             missAudio.Play();
         }
         // Add miss data to result text file
-        //logManager.GetComponent<LogTestResults>().AddText(projectile.name + " missed " + this.name + " by " + distAway + ".");
+        logManager.GetComponent<LogTestResults>().AddText(projectile.name + " missed " + this.name + " by " + distAway + ".");
+
+        Debug.Log("LANDED AS MISS");
     }
 
     // Function to reset the text string when called

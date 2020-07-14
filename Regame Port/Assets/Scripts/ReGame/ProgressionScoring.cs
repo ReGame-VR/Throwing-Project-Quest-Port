@@ -16,6 +16,9 @@ public class ProgressionScoring : MonoBehaviour
     // int to get index of next scene to load from calibration
     private int nextSceneIndex;
     // Start is called before the first frame update
+
+    public ProjectileManager projectileManager;
+
     void Start()
     {
         // If on Random progression type, select a random value between 4 and 20 for total throws
@@ -81,7 +84,18 @@ public class ProgressionScoring : MonoBehaviour
             }
         }
 
-        CheckProgression();
+        StartCoroutine(WaitToSpawn(1.0f));
+        //CheckProgression();
+    }
+
+    IEnumerator WaitToSpawn(float timeToWait)
+    {
+
+        //yield on a new YieldInstruction that waits for 5 seconds.
+        yield return new WaitForSeconds(timeToWait);
+
+        //After we have waited seconds reseet position.
+        projectileManager.ResetPositions();
     }
 
     // Adds a Result to the array of ThrowResults, filling in from the top, and removing the bottom one

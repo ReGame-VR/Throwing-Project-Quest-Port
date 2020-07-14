@@ -6,7 +6,7 @@ using System.IO;
 public class LogTestResults : MonoBehaviour
 {
     // Path of file
-    private string path;
+    public string path;
 
     //---------------Added-------------//
     private GlobalControl globalControl;
@@ -46,9 +46,10 @@ public class LogTestResults : MonoBehaviour
         // Content to add
         //string content = "\nTest: " + System.DateTime.Now + "\n";
 
-        string content = null;
+        //string content = null;
 
-        switch (globalControl.progression)
+        //This is no longer used because the Quest version does not have progression types.
+/*        switch (globalControl.progression)
         {
             case GlobalControl.ProgressionType.Choice:
                 content = "\nTest #C_" + globalControl.participantID + " " + System.DateTime.Now + "\n";
@@ -61,10 +62,10 @@ public class LogTestResults : MonoBehaviour
                 break;
             default:
                 break;
-        }
+        }*/
 
         //Original format
-        //string content = "\nTest: " + globalControl.participantID + " " + System.DateTime.Now + "\n";
+        string content = "\nParticipant: " + globalControl.participantID + " " + System.DateTime.Now + "\n";
 
         // Add the message to the file
         File.AppendAllText(path, content);

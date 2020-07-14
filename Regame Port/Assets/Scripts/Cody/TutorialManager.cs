@@ -22,6 +22,11 @@ public class TutorialManager : MonoBehaviour
     public TextMeshProUGUI throwCounterUI;
     public int totalPracticeThrows = 10;
     public LevelDifficulty levelDifficulty;
+    public GameObject practicePanel;
+    public LogTestResults logTestResults;
+    private bool testResultsWritten = false;
+    public GameObject platform;
+    public ProjectileManager projectileManager;
 
     public bool one = false;
     public bool two = false;
@@ -57,6 +62,13 @@ public class TutorialManager : MonoBehaviour
         {
             instructionsText.text = "Lets practice with a few throws. Grab the cube with the trigger and throw it in the basket! Goodluck!";
             throwCounter.SetActive(true);
+            practicePanel.SetActive(true);
+
+            if (!testResultsWritten)
+            {
+                logTestResults.AddText("\n-------------Practice Throws Beginning-------------\n");
+                testResultsWritten = true;
+            }
         }
 
         if (globalControl.handCheck && globalControl.hasWatchedInstructions && globalControl.hasCalibrated && !hasCompletedPractice)
@@ -66,9 +78,11 @@ public class TutorialManager : MonoBehaviour
             {
                 hasCompletedPractice = true;
                 accuracyChecker.ResetTotalThrows();
-
                 hasCompletedTutorial = true;
                 levelDifficulty.FullReset();
+                practicePanel.SetActive(false);
+                projectileManager.ProjectileSwitch(false);
+                platform.SetActive(false);
                 this.gameObject.SetActive(false);
             }
             if (total <= totalPracticeThrows)
