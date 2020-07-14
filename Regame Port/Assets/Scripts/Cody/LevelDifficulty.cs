@@ -23,7 +23,7 @@ public class LevelDifficulty : MonoBehaviour
     public float obstacleSpeed = 1.0f;
     public GlobalControl globalControl;
     public bool hasRecievedBaseline = false;
-    private GameObject obstacle;
+    private GameObject _obstacle;
 
 
     private void Update()
@@ -52,14 +52,14 @@ public class LevelDifficulty : MonoBehaviour
 
     public void SpawnObstacle()
     {
-        obstacle = Instantiate(obstaclePrefab, obstacleLocation);
+        _obstacle = Instantiate(obstaclePrefab, obstacleLocation);
     }
 
     public void DestroyObstacle()
     {
-        if(obstacle != null)
+        if(_obstacle != null)
         {
-            Destroy(obstacle);
+            Destroy(_obstacle);
         }
     }
 
