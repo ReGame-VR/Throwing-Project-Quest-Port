@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
 using UnityEngine;
@@ -10,28 +11,52 @@ public class GameplayTrigger : MonoBehaviour
     public GameObject levelCompletionParent;
     public GameObject percentagePanel;
     public Gameplay gameplay;
+    private float time = 0.0f;
+    public float totalTimeToActivation = 0.0f;
+    public MeshRenderer renderer;
+    public AudioSource audioSource;
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
         if (other.transform.parent == null)
             return;
 
-        if (other.transform.parent.name == "CustomHandLeft")
+        if(other.transform.parent.name == "CustomHandLeft")
         {
-            //Activate button panel
-            buttonPanel.SetActive(true);
-            //remove instructions panel ad activate buttons
-            levelCompletionParent.SetActive(false);
-            percentagePanel.SetActive(false);
+            time += Time.deltaTime;
+            renderer.material.color = Color.Lerp(Color.white, Color.blue, time);
+            OVRInput.SetControllerVibration(.25f, .25f, OVRInput.Controller.LTouch);
+            
+            if (time > totalTimeToActivation)
+            {
+                OVRInput.SetControllerVibration(0.0f,0.0f, OVRInput.Controller.LTouch);
+                buttonPanel.SetActive(true);
+                levelCompletionParent.SetActive(false);
+                percentagePanel.SetActive(false);
+                audioSource.Play();
+            }
         }
 
         if (other.transform.parent.name == "CustomHandRight")
         {
-            //Activate button panel
-            buttonPanel.SetActive(true);
-            //remove instructions panel ad activate buttons
-            levelCompletionParent.SetActive(false);
-            percentagePanel.SetActive(false);
+            time += Time.deltaTime;
+            renderer.material.color = Color.Lerp(Color.white, Color.blue, time);
+            OVRInput.SetControllerVibration(.25f, .25f, OVRInput.Controller.RTouch);
+            
+            if (time > totalTimeToActivation)
+            {
+                OVRInput.SetControllerVibration(0.0f,0.0f, OVRInput.Controller.RTouch);
+                buttonPanel.SetActive(true);
+                levelCompletionParent.SetActive(false);
+                percentagePanel.SetActive(false);
+                audioSource.Play();
+            }
         }
+    }
+
+    public void ResetTrigger()
+    {
+        time = 0.0f;
+        renderer.material.color = Color.white;
     }
 }

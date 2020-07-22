@@ -16,6 +16,7 @@ public class ProgressionScoring : MonoBehaviour
     // int to get index of next scene to load from calibration
     private int nextSceneIndex;
     // Start is called before the first frame update
+    public float ballSpawnTime = 1.0f;
 
     public ProjectileManager projectileManager;
 
@@ -41,7 +42,6 @@ public class ProgressionScoring : MonoBehaviour
         {
             nextSceneIndex = 0;
         }
-
         else
         {
             // Next Scene to load will be the one after this one in the build
@@ -84,17 +84,14 @@ public class ProgressionScoring : MonoBehaviour
             }
         }
 
-        StartCoroutine(WaitToSpawn(1.0f));
-        //CheckProgression();
+        StartCoroutine(WaitToSpawn(ballSpawnTime));
     }
 
     IEnumerator WaitToSpawn(float timeToWait)
     {
-
-        //yield on a new YieldInstruction that waits for 5 seconds.
         yield return new WaitForSeconds(timeToWait);
 
-        //After we have waited seconds reseet position.
+        //After we have waited seconds reset position.
         projectileManager.ResetPositions();
     }
 

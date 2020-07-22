@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -19,11 +20,14 @@ public class GroundChecker : MonoBehaviour
     public bool tracking;
     public ProjectileManager projectileManager;
     public OVRGrabbable grabbable;
-
+    private GlobalControl _globalControl;
+    public bool hasBeenGrabbed = false;
 
     // Start is called before the first frame update
     void Start()
     {
+        _globalControl = GameObject.Find("GlobalControl").GetComponent<GlobalControl>();
+        
         // On startup, the projectile will be tracked
         tracking = true;
         // Finds target in scene
@@ -51,7 +55,25 @@ public class GroundChecker : MonoBehaviour
             // Run the projectile's landed() function
             //Landed();
             tracking = false;
+            //hasBeenGrabbed = false;
         }
+    }
+
+    private void Update()
+    {
+        /*if (!grabbable.grabbedBy)
+            return;
+        
+        if (grabbable.grabbedBy.ToString().Equals("CustomHandRight (OVRGrabber)") && !hasBeenGrabbed)
+        {
+            StartCoroutine(Haptics(.25f, .25f, .1f, true, false));
+            hasBeenGrabbed = true;
+        }
+        if (grabbable.grabbedBy.ToString().Equals("CustomHandLeft (OVRGrabber)") && !hasBeenGrabbed)
+        {
+            StartCoroutine(Haptics(.25f, .25f, .1f, false, true));
+            hasBeenGrabbed = true;
+        }*/
     }
 
 
@@ -71,5 +93,16 @@ public class GroundChecker : MonoBehaviour
     private void HasReset()
     {
         tracking = true;
+    }
+    
+    IEnumerator Haptics(float frequency, float amplitude, float duration, bool rightHand, bool leftHand)
+    {
+        if(rightHand) OVRInput.SetControllerVibration(frequency, amplitude, OVRInput.Controller.RTouch);
+        if(leftHand) OVRInput.SetControllerVibration(frequency, amplitude, OVRInput.Controller.LTouch);
+
+        yield return new WaitForSeconds(duration);
+
+        if (rightHand) OVRInput.SetControllerVibration(0, 0, OVRInput.Controller.RTouch);
+        if (leftHand) OVRInput.SetControllerVibration(0, 0, OVRInput.Controller.LTouch);
     }
 }

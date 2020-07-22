@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
@@ -24,6 +25,8 @@ public class LevelDifficulty : MonoBehaviour
     public GlobalControl globalControl;
     public bool hasRecievedBaseline = false;
     private GameObject _obstacle;
+    public TextMeshProUGUI instructionsPanel; 
+    
 
 
     private void Update()
@@ -72,6 +75,9 @@ public class LevelDifficulty : MonoBehaviour
     {
         ResetTargetPosition();
         ResetTargetSize();
+        globalControl.currentLevel = "1";
+        instructionsPanel.text =
+            "Press the green button to start this level.";
     }
 
     public void LevelTwo()
@@ -80,14 +86,19 @@ public class LevelDifficulty : MonoBehaviour
         ResetTargetSize();
 
         MoveTarget();
+        globalControl.currentLevel = "2";
+        instructionsPanel.text =
+            "Press the red button to start this level.";
     }
 
     public void LevelThree()
     {
         ResetTargetPosition();
         ResetTargetSize();
-
         AdjustTargetSize(AdjustableObjectPercent);
+        globalControl.currentLevel = "3";
+        instructionsPanel.text =
+            "Press the yellow button to start this level.";
     }
 
     public void LevelFour()
@@ -98,6 +109,9 @@ public class LevelDifficulty : MonoBehaviour
 
         MoveTarget();
         AdjustTargetSize(AdjustableObjectPercent);
+        globalControl.currentLevel = "4";
+        instructionsPanel.text =
+            "Press the orange button to start this level.";
     }
 
     public void LevelFive()
@@ -108,6 +122,9 @@ public class LevelDifficulty : MonoBehaviour
         MoveTarget();
         AdjustTargetSize(AdjustableObjectPercent);
         SpawnObstacle();
+        globalControl.currentLevel = "5";
+        instructionsPanel.text =
+            "This is the last part! Please touch the color that the researcher suggested";
     }
 
     //Used to reset target reference

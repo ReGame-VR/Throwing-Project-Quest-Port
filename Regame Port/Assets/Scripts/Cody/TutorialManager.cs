@@ -22,7 +22,6 @@ public class TutorialManager : MonoBehaviour
     public TextMeshProUGUI throwCounterUI;
     public int totalPracticeThrows = 10;
     public LevelDifficulty levelDifficulty;
-    public GameObject practicePanel;
     public LogTestResults logTestResults;
     private bool testResultsWritten = false;
     public GameObject platform;
@@ -60,13 +59,11 @@ public class TutorialManager : MonoBehaviour
 
         if (globalControl.handCheck && globalControl.hasWatchedInstructions && globalControl.hasCalibrated)
         {
-            instructionsText.text = "Lets practice with a few throws. Grab the cube with the trigger and throw it in the basket! Goodluck!";
+            instructionsText.text = "Let’s practice a few throws! Pick up the ball by pulling the trigger. Let go of the trigger while you throw the ball.";
             throwCounter.SetActive(true);
-            practicePanel.SetActive(true);
 
             if (!testResultsWritten)
             {
-                logTestResults.AddText("\n-------------Practice Throws Beginning-------------\n");
                 testResultsWritten = true;
             }
         }
@@ -80,7 +77,6 @@ public class TutorialManager : MonoBehaviour
                 accuracyChecker.ResetTotalThrows();
                 hasCompletedTutorial = true;
                 levelDifficulty.FullReset();
-                practicePanel.SetActive(false);
                 projectileManager.ProjectileSwitch(false);
                 platform.SetActive(false);
                 this.gameObject.SetActive(false);
@@ -88,49 +84,8 @@ public class TutorialManager : MonoBehaviour
             if (total <= totalPracticeThrows)
             {
                 int throwsLeft = totalPracticeThrows - total;
-                throwCounterUI.text = throwsLeft.ToString();
+                throwCounterUI.text = "You have " + throwsLeft.ToString() + " left!";
             }
         }
-
-        /*        if (globalControl.handCheck && globalControl.hasWatchedInstructions && globalControl.hasCalibrated && hasCompletedPractice && !hasCompletedTutorial)
-                {
-                    int total = accuracyChecker.TotalThrows();
-                    int throwsLeft = totalPracticeThrows - total;
-                    instructionsText.text = "Now lets practice throwing with differnt levels. Goodluck!";
-                    throwCounterUI.text = throwsLeft.ToString();
-
-                    if (throwsLeft <= totalPracticeThrows && throwsLeft > totalPracticeThrows - 2 && !one)
-                    {
-                        levelDifficulty.LevelOne();
-                        one = true;
-                    }
-                    if (throwsLeft <= totalPracticeThrows - 2 && throwsLeft > totalPracticeThrows - 4 && !two)
-                    {
-                        levelDifficulty.LevelTwo();
-                        two = true;
-                    }
-                    if (throwsLeft <= totalPracticeThrows - 4 && throwsLeft > totalPracticeThrows - 6 && !three)
-                    {
-                        levelDifficulty.LevelThree();
-                        three = true;
-                    }
-                    if (throwsLeft <= totalPracticeThrows - 6 && throwsLeft > totalPracticeThrows - 8 && !four)
-                    {
-                        levelDifficulty.LevelFour();
-                        four = true;
-                    }
-                    if (throwsLeft <= totalPracticeThrows - 8 && throwsLeft > totalPracticeThrows - 10 && !five)
-                    {
-                        levelDifficulty.LevelFive();
-                        five = true;
-                    }
-                    if(total == totalPracticeThrows)
-                    {
-                        hasCompletedTutorial = true;
-                        levelDifficulty.FullReset();
-                        this.gameObject.SetActive(false);
-                    }
-                }
-                */
     }
 }

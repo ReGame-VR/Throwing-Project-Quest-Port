@@ -32,6 +32,8 @@ public class GlobalControl : MonoBehaviour
     //ID number to increment on start
     private int id = 0;
 
+    public string currentLevel = "Practice";
+
     // enum type(and instance) to differentiate different progression 
     public enum ProgressionType {Performance, Random, Choice};
     public ProgressionType progression;

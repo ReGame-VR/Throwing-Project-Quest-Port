@@ -22,6 +22,7 @@ public class Gameplay : MonoBehaviour
     public bool levelActivated = false;
     public LevelDifficulty levelDifficulty;
     public GameObject gameplayPanel;
+    public GameplayTrigger gameplayTrigger;
     public GameObject percentagePanel;
     public GameObject instructionsPanel;
     public GameObject remainingThrowsPanel;
@@ -40,9 +41,8 @@ public class Gameplay : MonoBehaviour
     {
         accuracyChecker.ResetTotalThrows();
         buttonPanel.SetActive(true);
-        instructionsText.text = "Press a button to choose a level difficulty.";
+        instructionsText.text = "Great! Now we are ready to start the game. You have 30 chances to throw the ball. Try to get it in the basket! Press the blue button to start this level.";
         buttonsPressedTotal = 0;
-        logTestResults.AddText("\n-------------Gameplay Beginning-------------");
     }
 
     // Update is called once per frame
@@ -67,21 +67,18 @@ public class Gameplay : MonoBehaviour
     public void LevelController()
     {
         int total = accuracyChecker.TotalThrows();
-        //instructionsText.text = "Now lets practice throwing with differnt levels. Goodluck!";
         int throwsLeft = totalThrowsAllowedPerLevel - total;
-        remainingThrows.text = throwsLeft.ToString();
+        remainingThrows.text = "You have " + throwsLeft.ToString() + " left!";
 
         if (finalRound)
         {
-            //LevelComplete();
-            //Display panel instructing completion.
             remainingThrowsPanel.SetActive(false);
+            gameplayTrigger.ResetTrigger();
             completionPanel.SetActive(true);
             instructionsPanel.SetActive(false);
             gameplayPanel.SetActive(false);
             percentagePanel.SetActive(false);
             gameComplete = true;
-            logTestResults.AddText("\n--------Complete--------");
             return;
         }
 
@@ -93,19 +90,16 @@ public class Gameplay : MonoBehaviour
     
     public void LevelComplete()
     {
-        //Might need to hide throwable object
         pm.ProjectileSwitch(false);
         target.SetActive(false);
         platform.SetActive(false);
         levelDifficulty.DestroyObstacle();
-        //buttonPanel.SetActive(true);
-        //Pop up instructions to talk with instructor
         instructionsPanel.SetActive(true);
+        gameplayTrigger.ResetTrigger();
         gameplayPanel.SetActive(true);
         percentagePanel.SetActive(true);
         GetAccuracvPercentage();
-        percentageText.text = String.Format("{0:0.0}", completionPercent) + "%";
-        logTestResults.AddText("Success Rate = " + String.Format("{0:0.0}", completionPercent) + "%");
+        percentageText.text = "You got " + accuracyChecker.numHit + "/" + (accuracyChecker.numMiss + accuracyChecker.numHit) + " throws into the basket!";
         accuracyChecker.ResetTotalThrows();
         pm.buttonActivator = false;
         AddLevelCount();

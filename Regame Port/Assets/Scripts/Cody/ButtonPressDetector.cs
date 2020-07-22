@@ -27,7 +27,6 @@ public class ButtonPressDetector : MonoBehaviour
     public GameObject instructionPanel;
     public GameObject rightWall;
     public GameObject backpack;
-    public LogTestResults logTestResults;
 
     // Start is called before the first frame update
     void Start()
@@ -65,6 +64,7 @@ public class ButtonPressDetector : MonoBehaviour
             SwapColor(backpack, buttonMaterial);
             accuracyChecker.ResetTotalThrows();
             pm.buttonActivator = true;
+            
         }
     }
 
@@ -73,29 +73,19 @@ public class ButtonPressDetector : MonoBehaviour
         switch (level)
         {
             case "one":
-                Debug.Log("Level one activated.");
                 levelDifficulty.LevelOne();
-                logTestResults.AddText("\nLevel One:");
                 break;
             case "two":
-                Debug.Log("Level two activated.");
                 levelDifficulty.LevelTwo();
-                logTestResults.AddText("\nLevel Two:");
                 break;
             case "three":
-                Debug.Log("Level three activated.");
                 levelDifficulty.LevelThree();
-                logTestResults.AddText("\nLevel Three:");
                 break;
             case "four":
-                Debug.Log("Level four activated.");
                 levelDifficulty.LevelFour();
-                logTestResults.AddText("\nLevel Four:");
                 break;
             case "five":
-                Debug.Log("Level five activated.");
                 levelDifficulty.LevelFive();
-                logTestResults.AddText("\nLevel Five:");
                 break;
             default:
                 break;

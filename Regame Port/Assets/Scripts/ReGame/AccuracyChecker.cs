@@ -35,6 +35,7 @@ public class AccuracyChecker : MonoBehaviour
     AudioSource successAudio;
     AudioSource missAudio;
     public ProjectileManager projectileManager;
+    public GlobalControl globalControl;
 
     // Start is called before the first frame update
     void Start()
@@ -69,9 +70,9 @@ public class AccuracyChecker : MonoBehaviour
         var otherGameobject = other.gameObject;
         var groundChecker = otherGameobject.GetComponent<GroundChecker>();
         if (!groundChecker) return;
+        
+        string[] data = new string[7];
 
-        // If a projectile-tagged object hits the trigger while it is being tracked
-        //if (other.gameObject.GetComponent<GroundChecker>().GetTracking() && other.gameObject.CompareTag("Projectile"))
         if (groundChecker.tracking && otherGameobject.CompareTag("Projectile"))
         {
             // Update the hit counter
@@ -89,12 +90,11 @@ public class AccuracyChecker : MonoBehaviour
             if (progressionScore)
                 progressionScore.GetComponent<ProgressionScoring>()?.ThrowComplete(true);
 
-            // Add hit data to result text file
-            if (logManager)
-                logManager.GetComponent<LogTestResults>()?.AddText(other.gameObject.name + " successfully hit " + this.name + ".");
+            //groundChecker.hasBeenGrabbed = false;
 
-
-            Debug.Log("LANDED AS HIT");
+            data = CSVManager.DataInputToArray(globalControl.participantID, System.DateTime.Now.ToString("MM/dd"),
+                System.DateTime.UtcNow.ToLocalTime().ToString(), globalControl.currentLevel, TotalThrows().ToString(), distAway.ToString(), "Yes");
+            CSVManager.AppendToReport(data);
         }
     }
 
@@ -112,17 +112,13 @@ public class AccuracyChecker : MonoBehaviour
         {
             missAudio.Play();
         }
-        // Add miss data to result text file
-        logManager.GetComponent<LogTestResults>().AddText(projectile.name + " missed " + this.name + " by " + distAway + ".");
 
-        Debug.Log("LANDED AS MISS");
+        string[] data = new string[7];
+        data = CSVManager.DataInputToArray(globalControl.participantID, System.DateTime.Now.ToString("MM/dd"),
+            System.DateTime.UtcNow.ToString(), globalControl.currentLevel, TotalThrows().ToString(), distAway.ToString(), "No");
+        CSVManager.AppendToReport(data);
     }
-
-    // Function to reset the text string when called
-    private void ResetDistText()
-    {
-        distanceFromTargetText = "Please throw the projectile to begin.";
-    }
+    
 
     public int TotalThrows()
     {

@@ -76,7 +76,7 @@ public class ProjectileManager : MonoBehaviour
             projectiles[i].GetComponent<GroundChecker>().tracking = true;
             // Tell the projectile's corresponding target to run its ResetDistText() function to reset 
             // the TMPro GUI object for the next throw
-            projectiles[i].GetComponent<GroundChecker>().target.SendMessage("ResetDistText");
+            //projectiles[i].GetComponent<GroundChecker>().target.SendMessage("ResetDistText");
         }
         // Add reset data to result text file
         //logManager.GetComponent<LogTestResults>().AddText("Reset for next throw.");
