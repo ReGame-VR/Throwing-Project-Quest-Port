@@ -36,6 +36,7 @@ public class AccuracyChecker : MonoBehaviour
     AudioSource missAudio;
     public ProjectileManager projectileManager;
     public GlobalControl globalControl;
+    public CSVManager csvManager;
 
     // Start is called before the first frame update
     void Start()
@@ -92,9 +93,10 @@ public class AccuracyChecker : MonoBehaviour
 
             //groundChecker.hasBeenGrabbed = false;
 
-            data = CSVManager.DataInputToArray(globalControl.participantID, System.DateTime.Now.ToString("MM/dd"),
-                System.DateTime.UtcNow.ToLocalTime().ToString(), globalControl.currentLevel, TotalThrows().ToString(), distAway.ToString(), "Yes");
-            CSVManager.AppendToReport(data);
+            data = csvManager.DataInputToArray(globalControl.participantID, System.DateTime.Now.ToString("d"),
+                System.DateTime.Now.ToString("hh:mm:ss"), globalControl.currentLevel, TotalThrows().ToString(), distAway.ToString(), "Yes");
+            
+            csvManager.AppendToReport(data);
         }
     }
 
@@ -114,9 +116,10 @@ public class AccuracyChecker : MonoBehaviour
         }
 
         string[] data = new string[7];
-        data = CSVManager.DataInputToArray(globalControl.participantID, System.DateTime.Now.ToString("MM/dd"),
-            System.DateTime.UtcNow.ToString(), globalControl.currentLevel, TotalThrows().ToString(), distAway.ToString(), "No");
-        CSVManager.AppendToReport(data);
+        data = csvManager.DataInputToArray(globalControl.participantID, System.DateTime.Now.ToString("d"),
+            System.DateTime.Now.ToString("hh:mm:ss"), globalControl.currentLevel, TotalThrows().ToString(), distAway.ToString(), "No");
+
+        csvManager.AppendToReport(data);
     }
     
 

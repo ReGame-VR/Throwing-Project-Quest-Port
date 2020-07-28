@@ -1,15 +1,15 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using System.IO;
 
-public static class CSVManager {
+public class CSVManager : MonoBehaviour {
     
-    //public static string path = "Assets/Resources/ResultsLog.csv";
-    public static string path = Application.persistentDataPath + "./Data/test.txt";
-    private static string reportDirectoryName = "Report";
-    private static string reportFileName = "report.csv";
-    private static string reportSeparator = ",";
-    private static string[] reportHeaders = new string[7] {
-        "Part_ID",
+    private string path;
+    private string reportDirectoryName = "Report";
+    private string reportFileName = "report.csv";
+    private string reportSeparator = ",";
+    private string[] reportHeaders = new string[7] {
+        "Participant ID",
         "Date",
         "Time",
         "Level",
@@ -17,11 +17,10 @@ public static class CSVManager {
         "Error",
         "Success(Y/N)"
     };
-    private static string timeStampHeader = "Time Stamp";
 
 #region Interactions
 
-    public static void AppendToReport(string[] strings) {
+    public void AppendToReport(string[] strings) {
         VerifyFile();
         using (StreamWriter sw = File.AppendText(path)) {
             string finalString = "";
@@ -31,12 +30,11 @@ public static class CSVManager {
                 }
                 finalString += strings[i];
             }
-            finalString += reportSeparator + GetTimeStamp();
             sw.WriteLine(finalString);
         }
     }
 
-    private static void CreateReport() {
+    private void CreateReport() {
         using (StreamWriter sw = File.CreateText(path)) {
             string finalString = "";
             for (int i = 0; i < reportHeaders.Length; i++) {
@@ -45,12 +43,11 @@ public static class CSVManager {
                 }
                 finalString += reportHeaders[i];
             }
-            finalString += reportSeparator + timeStampHeader;
             sw.WriteLine(finalString);
         }
     }
 
-    public static string[] DataInputToArray(string partId, string date, string time, string level, string throwNum, string error, string success)
+    public string[] DataInputToArray(string partId, string date, string time, string level, string throwNum, string error, string success)
     {
         string[] data = new string[7];
         data[0] = partId;
@@ -69,25 +66,26 @@ public static class CSVManager {
 
 #region Operations
 
-    public static void VerifyFile() {
+    private void VerifyFile() {
         string file = GetFilePath();
         if (!File.Exists(file)) {
             CreateReport();
         }
     }
 
-#endregion
+    private void Awake()
+    {
+        //path = "Assets/Resources/ResultsLog.csv";
+        path = Application.persistentDataPath + "/Data.csv";
+    }
+
+    #endregion
 
 
 #region Queries
 
-    static string GetFilePath() {
+    private string GetFilePath() {
         return path;
-    }
-
-    static string GetTimeStamp()
-    {
-        return System.DateTime.UtcNow.ToLocalTime().ToString();
     }
 
 #endregion

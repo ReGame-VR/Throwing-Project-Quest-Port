@@ -941,6 +941,49 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 158106804}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &162347395
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 162347397}
+  - component: {fileID: 162347396}
+  m_Layer: 0
+  m_Name: '[CSV MANAGER]'
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &162347396
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 162347395}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab289330d55133441bc850669691ca98, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &162347397
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 162347395}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &162493825
 GameObject:
   m_ObjectHideFlags: 0
@@ -1314,6 +1357,7 @@ MonoBehaviour:
   globalControl: {fileID: 1652398044}
   hasRecievedBaseline: 0
   instructionsPanel: {fileID: 1822904202}
+  gameplay: {fileID: 1725027594}
 --- !u!4 &221726938
 Transform:
   m_ObjectHideFlags: 0
@@ -8885,7 +8929,7 @@ MonoBehaviour:
   accuracyChecker: {fileID: 1729888956981284944}
   throwCounter: {fileID: 1607603776}
   throwCounterUI: {fileID: 760123409}
-  totalPracticeThrows: 10
+  totalPracticeThrows: 1
   levelDifficulty: {fileID: 221726937}
   logTestResults: {fileID: 1437774430}
   platform: {fileID: 1543874918}
@@ -10327,6 +10371,10 @@ MonoBehaviour:
   buttonPanel: {fileID: 1586533573}
   levelCompletionParent: {fileID: 1299902385}
   percentagePanel: {fileID: 1457550937}
+  instructionsPanel: {fileID: 1155115765}
+  target: {fileID: 1115368978}
+  pm: {fileID: 956145689}
+  platform: {fileID: 1543874918}
   gameplay: {fileID: 1725027594}
   totalTimeToActivation: 1
   renderer: {fileID: 1375302019}
@@ -13225,7 +13273,7 @@ MonoBehaviour:
   instructionsText: {fileID: 1822904202}
   percentageOfThrows: {fileID: 0}
   remainingThrows: {fileID: 760123409}
-  totalThrowsAllowedPerLevel: 30
+  totalThrowsAllowedPerLevel: 1
   accuracyChecker: {fileID: 1729888956981284944}
   buttons:
   - {fileID: 1096812410}
@@ -13247,6 +13295,8 @@ MonoBehaviour:
   pm: {fileID: 956145689}
   logTestResults: {fileID: 1437774430}
   completionPanel: {fileID: 943533134}
+  hasCompletedFinalLevel: 0
+  numOfFinalRounds: 0
   totalLevelCount: 0
 --- !u!1001 &1742292157
 PrefabInstance:
@@ -14170,7 +14220,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 11400002, guid: ce816f2e6abb0504092c23ed9b970dfd, type: 3}
       propertyPath: _trackingOriginType
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 11414578, guid: ce816f2e6abb0504092c23ed9b970dfd, type: 3}
       propertyPath: m_Enabled
@@ -16559,6 +16609,7 @@ MonoBehaviour:
   progressionScore: {fileID: 0}
   projectileManager: {fileID: 956145689}
   globalControl: {fileID: 1652398044}
+  csvManager: {fileID: 162347396}
 --- !u!114 &1874540005822613908
 MonoBehaviour:
   m_ObjectHideFlags: 0

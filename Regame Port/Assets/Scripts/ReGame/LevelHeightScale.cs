@@ -77,17 +77,6 @@ public class LevelHeightScale : MonoBehaviour
         {
             platform.transform.position = new Vector3(platform.transform.position.x + 1.056f, platform.transform.position.y, platform.transform.position.z);
         }
-        AdjustPlatform();
-        AdjustTarget();
-/*        if (!currScene.name.Equals("Calibration"))
-        {
-            //SpawnProjectile();
-        }
-        if (GlobalControl.Instance.progression.Equals(GlobalControl.ProgressionType.Choice))
-        {
-            GlobalControl.Instance.nextScene = GlobalControl.Scene.Classroom;
-        }
-        nextSceneIndex = currScene.buildIndex + 1;*/
     }
 
     // Update is called once per frame
@@ -95,15 +84,18 @@ public class LevelHeightScale : MonoBehaviour
     {
         height = GlobalControl.Instance.height;
         armLength = GlobalControl.Instance.armLength;
+        
+        SetPlatformHeight();
+        AdjustTarget();
 
         //Original Code for changing scene from calibration
         //Added below was additional check for tutorial completion
-/*        if (GlobalControl.Instance.hasCalibrated && !hasFaded &&
+        if (GlobalControl.Instance.hasCalibrated && !hasFaded &&
             (OVRInput.GetUp(OVRInput.RawButton.X) || Input.GetKeyUp(KeyCode.KeypadEnter)))
         {
             hasFaded = true;
             LoadSceneHelper();
-        }*/
+        }
 
         if (GlobalControl.Instance.hasCalibrated && !hasFaded && tutorialManager.hasCompletedTutorial)
         {
@@ -130,6 +122,13 @@ public class LevelHeightScale : MonoBehaviour
         //Debug.Log("Adjusting Platform");
         platform.transform.localScale = new Vector3(platform.transform.localScale.x, startHeight + armLength - platformOffset, platform.transform.localScale.z);
         platform.transform.position = new Vector3(platform.transform.position.x, startYposPlatform + (platform.transform.localScale.y / 2), platform.transform.position.z);
+    }
+    
+    public void SetPlatformHeight()
+    {
+        platform.transform.localScale = new Vector3(platform.transform.localScale.x, startHeight + height/2, platform.transform.localScale.z);
+        platform.transform.position = new Vector3(platform.transform.position.x, startYposPlatform + (platform.transform.localScale.y / 2), platform.transform.position.z);
+        GlobalControl.Instance.hasCalibrated = true;
     }
 
     // Spawns the projectile to be thrown

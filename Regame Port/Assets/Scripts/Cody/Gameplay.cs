@@ -32,7 +32,8 @@ public class Gameplay : MonoBehaviour
     public ProjectileManager pm;
     public LogTestResults logTestResults;
     public GameObject completionPanel;
-    private bool finalRound = false;
+    public bool hasCompletedFinalLevel = false;
+    public int numOfFinalRounds = 0;
     private bool gameComplete = false;
     public int totalLevelCount = 0;
 
@@ -50,18 +51,41 @@ public class Gameplay : MonoBehaviour
     {
         if (!gameComplete)
         {
-            if (RoundCompleted())
+            if (RoundCompleted() && !hasCompletedFinalLevel)
             {
                 ResetButtons();
             }
-            if (totalLevelCount == 6)
+
+            if (totalLevelCount == 6 && !hasCompletedFinalLevel)
             {
-                finalRound = true;
+                hasCompletedFinalLevel = true;
+                accuracyChecker.ResetTotalThrows();
+                totalLevelCount = 0;
             }
+
+            if (hasCompletedFinalLevel && totalLevelCount == 3)
+            {
+                Debug.Log("GAME OVER");
+                instructionsPanel.SetActive(false);
+                pm.ProjectileSwitch(false);
+                target.SetActive(false);
+                platform.SetActive(false);
+                levelDifficulty.DestroyObstacle();
+                remainingThrowsPanel.SetActive(false);
+                completionPanel.SetActive(true);
+                gameplayPanel.SetActive(false);
+                gameplayPanel.SetActive(false);
+                percentagePanel.SetActive(false);
+                GetAccuracvPercentage();
+                percentageText.text = "You got " + accuracyChecker.numHit + "/" + (accuracyChecker.numMiss + accuracyChecker.numHit) + " throws into the basket!";
+                accuracyChecker.ResetTotalThrows();
+                pm.buttonActivator = false;
+                gameComplete = true;
+                return;
+            }
+
             LevelController();
         }
-        
-
     }
 
     public void LevelController()
@@ -70,19 +94,13 @@ public class Gameplay : MonoBehaviour
         int throwsLeft = totalThrowsAllowedPerLevel - total;
         remainingThrows.text = "You have " + throwsLeft.ToString() + " left!";
 
-        if (finalRound)
+        if (total >= totalThrowsAllowedPerLevel && hasCompletedFinalLevel && numOfFinalRounds < 4)
         {
-            remainingThrowsPanel.SetActive(false);
-            gameplayTrigger.ResetTrigger();
-            completionPanel.SetActive(true);
-            instructionsPanel.SetActive(false);
-            gameplayPanel.SetActive(false);
-            percentagePanel.SetActive(false);
-            gameComplete = true;
-            return;
+            FinalRounds();
+            Debug.Log("Final Round Completed");
         }
-
-        if (total >= totalThrowsAllowedPerLevel)
+        
+        if (total >= totalThrowsAllowedPerLevel && !hasCompletedFinalLevel)
         {
             LevelComplete();
         }
@@ -94,7 +112,7 @@ public class Gameplay : MonoBehaviour
         target.SetActive(false);
         platform.SetActive(false);
         levelDifficulty.DestroyObstacle();
-        instructionsPanel.SetActive(true);
+        instructionsPanel.SetActive(false);
         gameplayTrigger.ResetTrigger();
         gameplayPanel.SetActive(true);
         percentagePanel.SetActive(true);
@@ -105,6 +123,23 @@ public class Gameplay : MonoBehaviour
         AddLevelCount();
     }
 
+    public void FinalRounds()
+    {
+        pm.ProjectileSwitch(false);
+        target.SetActive(false);
+        platform.SetActive(false);
+        levelDifficulty.DestroyObstacle();
+        instructionsPanel.SetActive(false);
+        gameplayTrigger.ResetTrigger();
+        gameplayPanel.SetActive(true);
+        percentagePanel.SetActive(true);
+        GetAccuracvPercentage();
+        percentageText.text = "You got " + accuracyChecker.numHit + "/" + (accuracyChecker.numMiss + accuracyChecker.numHit) + " throws into the basket!";
+        accuracyChecker.ResetTotalThrows();
+        pm.buttonActivator = false;
+        AddLevelCount();
+    }
+    
     public int NumLevelsCompleted()
     {
         int totalButtonsPressed = 0;

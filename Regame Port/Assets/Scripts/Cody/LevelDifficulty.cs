@@ -25,7 +25,8 @@ public class LevelDifficulty : MonoBehaviour
     public GlobalControl globalControl;
     public bool hasRecievedBaseline = false;
     private GameObject _obstacle;
-    public TextMeshProUGUI instructionsPanel; 
+    public TextMeshProUGUI instructionsPanel;
+    public Gameplay gameplay;
     
 
 
@@ -76,8 +77,7 @@ public class LevelDifficulty : MonoBehaviour
         ResetTargetPosition();
         ResetTargetSize();
         globalControl.currentLevel = "1";
-        instructionsPanel.text =
-            "Press the green button to start this level.";
+        instructionsPanel.text = !gameplay.hasCompletedFinalLevel ? "Press the green button to start this level." : "TEST";
     }
 
     public void LevelTwo()
@@ -87,8 +87,8 @@ public class LevelDifficulty : MonoBehaviour
 
         MoveTarget();
         globalControl.currentLevel = "2";
-        instructionsPanel.text =
-            "Press the red button to start this level.";
+
+        instructionsPanel.text = !gameplay.hasCompletedFinalLevel ? "Press the red button to start this level." : "TEST";
     }
 
     public void LevelThree()
@@ -97,8 +97,9 @@ public class LevelDifficulty : MonoBehaviour
         ResetTargetSize();
         AdjustTargetSize(AdjustableObjectPercent);
         globalControl.currentLevel = "3";
-        instructionsPanel.text =
-            "Press the yellow button to start this level.";
+        
+        instructionsPanel.text = !gameplay.hasCompletedFinalLevel ? "Press the yellow button to start this level." : "TEST";
+        
     }
 
     public void LevelFour()
@@ -110,8 +111,8 @@ public class LevelDifficulty : MonoBehaviour
         MoveTarget();
         AdjustTargetSize(AdjustableObjectPercent);
         globalControl.currentLevel = "4";
-        instructionsPanel.text =
-            "Press the orange button to start this level.";
+        
+        instructionsPanel.text = !gameplay.hasCompletedFinalLevel ? "Press the orange button to start this level." : "TEST";
     }
 
     public void LevelFive()
@@ -123,8 +124,8 @@ public class LevelDifficulty : MonoBehaviour
         AdjustTargetSize(AdjustableObjectPercent);
         SpawnObstacle();
         globalControl.currentLevel = "5";
-        instructionsPanel.text =
-            "This is the last part! Please touch the color that the researcher suggested";
+        
+        instructionsPanel.text = !gameplay.hasCompletedFinalLevel ? "This is the last part! Please touch the color that the researcher suggested" : "TEST";
     }
 
     //Used to reset target reference
