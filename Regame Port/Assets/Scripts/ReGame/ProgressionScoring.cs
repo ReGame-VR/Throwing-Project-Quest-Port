@@ -62,13 +62,13 @@ public class ProgressionScoring : MonoBehaviour
     public void ThrowComplete(bool success)
     {
         // Add to throw total
-        Debug.Log("DEBUG ----- Throw logged.");
+        //Debug.Log("DEBUG ----- Throw logged.");
         totalThrows += 1;
         // If success, add to success total, and if in Performance progression mode, add a Hit result
         // to the Results array
         if (success)
         {
-            Debug.Log("DEBUG ----- Throw was successful.");
+            //Debug.Log("DEBUG ----- Throw was successful.");
             totalSuccesses += 1;
             if (GlobalControl.Instance.progression.Equals(GlobalControl.ProgressionType.Performance))
             {

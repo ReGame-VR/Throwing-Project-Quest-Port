@@ -125,7 +125,7 @@ public class LevelDifficulty : MonoBehaviour
         SpawnObstacle();
         globalControl.currentLevel = "5";
         
-        instructionsPanel.text = !gameplay.hasCompletedFinalLevel ? "This is the last part! Please touch the color that the researcher suggested" : "TEST";
+        instructionsPanel.text = !gameplay.hasCompletedFinalLevel ? "This is the last part! Please touch the color that the researcher suggested." : "TEST";
     }
 
     //Used to reset target reference

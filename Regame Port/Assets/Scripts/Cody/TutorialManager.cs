@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.Video;
 
 public class TutorialManager : MonoBehaviour
@@ -26,6 +27,7 @@ public class TutorialManager : MonoBehaviour
     private bool testResultsWritten = false;
     public GameObject platform;
     public ProjectileManager projectileManager;
+    public ButtonPanel buttonPanel;
 
     public bool one = false;
     public bool two = false;
@@ -79,6 +81,9 @@ public class TutorialManager : MonoBehaviour
                 levelDifficulty.FullReset();
                 projectileManager.ProjectileSwitch(false);
                 platform.SetActive(false);
+                
+                buttonPanel.ButtonSwitch();
+                
                 this.gameObject.SetActive(false);
             }
             if (total <= totalPracticeThrows)

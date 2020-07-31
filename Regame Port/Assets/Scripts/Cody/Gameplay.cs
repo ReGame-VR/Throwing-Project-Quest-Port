@@ -36,6 +36,8 @@ public class Gameplay : MonoBehaviour
     public int numOfFinalRounds = 0;
     private bool gameComplete = false;
     public int totalLevelCount = 0;
+    public TextMeshProUGUI gameplayPanelText;
+
 
     // Start is called before the first frame update
     void Start()
@@ -44,6 +46,13 @@ public class Gameplay : MonoBehaviour
         buttonPanel.SetActive(true);
         instructionsText.text = "Great! Now we are ready to start the game. You have 30 chances to throw the ball. Try to get it in the basket! Press the blue button to start this level.";
         buttonsPressedTotal = 0;
+        
+        OVRManager.HMDMounted += HandleHMDMounted;
+    }
+
+    private void OnDestroy()
+    {
+        OVRManager.HMDMounted -= HandleHMDMounted;
     }
 
     // Update is called once per frame
@@ -121,6 +130,7 @@ public class Gameplay : MonoBehaviour
         accuracyChecker.ResetTotalThrows();
         pm.buttonActivator = false;
         AddLevelCount();
+        levelComplete = true;
     }
 
     public void FinalRounds()
@@ -178,6 +188,14 @@ public class Gameplay : MonoBehaviour
         for(int i = 0; i < buttons.Count; i++)
         {
             buttons[i].ResetButtonPosition();
+        }
+    }
+
+    public void HandleHMDMounted()
+    {
+        if (levelComplete)
+        {
+            gameplayPanelText.text = "Please touch the white circle when you are ready to begin again!";
         }
     }
 }

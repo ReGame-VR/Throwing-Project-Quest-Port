@@ -48,6 +48,7 @@ public class ButtonPressDetector : MonoBehaviour
 
         if (depthDistance >= buttonDepthValue && !buttonActivated)
         {
+            Debug.Log("Button Activated: " + this.gameObject.name);
             buttonActivated = true;
             audioSource.Play();
             buttonRigidbody.constraints = RigidbodyConstraints.FreezeAll;
@@ -64,7 +65,7 @@ public class ButtonPressDetector : MonoBehaviour
             SwapColor(backpack, buttonMaterial);
             accuracyChecker.ResetTotalThrows();
             pm.buttonActivator = true;
-            
+            gameplay.levelComplete = false;
         }
     }
 
@@ -74,18 +75,23 @@ public class ButtonPressDetector : MonoBehaviour
         {
             case "one":
                 levelDifficulty.LevelOne();
+                Debug.Log("Level one called.");
                 break;
             case "two":
                 levelDifficulty.LevelTwo();
+                Debug.Log("Level two called.");
                 break;
             case "three":
                 levelDifficulty.LevelThree();
+                Debug.Log("Level three called.");
                 break;
             case "four":
                 levelDifficulty.LevelFour();
+                Debug.Log("Level four called.");
                 break;
             case "five":
                 levelDifficulty.LevelFive();
+                Debug.Log("Level five called.");
                 break;
             default:
                 break;
@@ -109,5 +115,16 @@ public class ButtonPressDetector : MonoBehaviour
         buttonActivated = false;
         buttonRigidbody.constraints = ~RigidbodyConstraints.FreezePositionY;
 
+    }
+
+    public void FreezeButtonPosition()
+    {
+        buttonRigidbody.constraints = RigidbodyConstraints.FreezeAll;
+    }
+
+    public void UnfreezeButtonPosition()
+    {
+        buttonActivated = false;
+        buttonRigidbody.constraints = ~RigidbodyConstraints.FreezePositionY;
     }
 }

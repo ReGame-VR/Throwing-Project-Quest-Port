@@ -88,15 +88,6 @@ public class LevelHeightScale : MonoBehaviour
         SetPlatformHeight();
         AdjustTarget();
 
-        //Original Code for changing scene from calibration
-        //Added below was additional check for tutorial completion
-        if (GlobalControl.Instance.hasCalibrated && !hasFaded &&
-            (OVRInput.GetUp(OVRInput.RawButton.X) || Input.GetKeyUp(KeyCode.KeypadEnter)))
-        {
-            hasFaded = true;
-            LoadSceneHelper();
-        }
-
         if (GlobalControl.Instance.hasCalibrated && !hasFaded && tutorialManager.hasCompletedTutorial)
         {
             hasFaded = true;
@@ -104,6 +95,7 @@ public class LevelHeightScale : MonoBehaviour
             screenFade.SetActive(false);
             classroom.SetActive(true);
             GameplayManager.SetActive(true);
+            this.gameObject.SetActive(false);
         }
     }
 
@@ -134,7 +126,7 @@ public class LevelHeightScale : MonoBehaviour
     // Spawns the projectile to be thrown
     public void SpawnProjectile()
     {
-        Debug.Log("DEBUG ----- Spawning " + projectilePrefab.name);
+        //Debug.Log("DEBUG ----- Spawning " + projectilePrefab.name);
         // Spawns projectile based on provided prefab, updates corresponding arrays for projectiles, their positions, and their rotations
         projectileInstance = (GameObject)Instantiate(projectilePrefab, new Vector3(platform.transform.position.x, 
             platform.transform.position.y + platform.transform.localScale.y, 

@@ -8,8 +8,9 @@ using UnityEngine.UI;
 
 public class GameplayTrigger : MonoBehaviour
 {
-    public GameObject buttonPanel;
+    public GameObject buttonPanelObject;
     public GameObject levelCompletionParent;
+    public TextMeshProUGUI levelCompletionText;
     public GameObject percentagePanel;
     public GameObject instructionsPanel;
     public GameObject target;
@@ -20,6 +21,7 @@ public class GameplayTrigger : MonoBehaviour
     public float totalTimeToActivation = 0.0f;
     public MeshRenderer renderer;
     public AudioSource audioSource;
+    public ButtonPanel buttonPanel;
 
     private void OnTriggerStay(Collider other)
     {
@@ -44,6 +46,8 @@ public class GameplayTrigger : MonoBehaviour
                 target.SetActive(true);
                 pm.ProjectileSwitch(true);
                 audioSource.Play();
+                levelCompletionText.text = "Nice Work!" +
+                                           " Please take off your headset to talk to the researcher.";
                 return;
             }
             
@@ -51,12 +55,16 @@ public class GameplayTrigger : MonoBehaviour
             if (time > totalTimeToActivation)
             {
                 OVRInput.SetControllerVibration(0.0f,0.0f, OVRInput.Controller.LTouch);
-                buttonPanel.SetActive(true);
+                buttonPanelObject.SetActive(true);
                 levelCompletionParent.SetActive(false);
                 percentagePanel.SetActive(false);
                 instructionsPanel.SetActive(true);
                 target.SetActive(true);
                 audioSource.Play();
+                levelCompletionText.text = "Nice Work!" +
+                                           " Please take off your headset to talk to the researcher.";
+
+                buttonPanel.ButtonSwitch();
             }
         }
 
@@ -78,18 +86,24 @@ public class GameplayTrigger : MonoBehaviour
                 target.SetActive(true);
                 pm.ProjectileSwitch(true);
                 audioSource.Play();
+                levelCompletionText.text = "Nice Work!" +
+                                           " Please take off your headset to talk to the researcher.";
                 return;
             }
             
             if (time > totalTimeToActivation)
             {
                 OVRInput.SetControllerVibration(0.0f,0.0f, OVRInput.Controller.RTouch);
-                buttonPanel.SetActive(true);
+                buttonPanelObject.SetActive(true);
                 levelCompletionParent.SetActive(false);
                 percentagePanel.SetActive(false);
                 instructionsPanel.SetActive(true);
                 target.SetActive(true);
                 audioSource.Play();
+                levelCompletionText.text = "Nice Work!" +
+                                           " Please take off your headset to talk to the researcher.";
+                
+                buttonPanel.ButtonSwitch();
             }
         }
     }

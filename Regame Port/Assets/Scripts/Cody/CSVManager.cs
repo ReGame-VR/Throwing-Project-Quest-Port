@@ -5,9 +5,9 @@ using System.IO;
 public class CSVManager : MonoBehaviour {
     
     private string path;
-    private string reportDirectoryName = "Report";
-    private string reportFileName = "report.csv";
+    public string reportFileName = "Data.csv";
     private string reportSeparator = ",";
+    
     private string[] reportHeaders = new string[7] {
         "Participant ID",
         "Date",
@@ -75,8 +75,11 @@ public class CSVManager : MonoBehaviour {
 
     private void Awake()
     {
+        //Non-Quest version path
         //path = "Assets/Resources/ResultsLog.csv";
-        path = Application.persistentDataPath + "/Data.csv";
+        
+        //Quest Path as of 07/28/2020
+        path = Application.persistentDataPath + "/" + reportFileName;
     }
 
     #endregion

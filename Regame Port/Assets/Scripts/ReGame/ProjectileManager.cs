@@ -44,7 +44,7 @@ public class ProjectileManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // When the player presses the "A" button on the right hand controller
+        /*// When the player presses the "A" button on the right hand controller
         if (OVRInput.GetUp(OVRInput.RawButton.A) && buttonActivator)
         {
             Debug.Log("Player reset");
@@ -57,7 +57,7 @@ public class ProjectileManager : MonoBehaviour
             Debug.Log("Operator reset");
             // Call the ResetPositions() function
             ResetPositions();
-        }
+        }*/
     }
 
     // Function to reset every projectile to its original place

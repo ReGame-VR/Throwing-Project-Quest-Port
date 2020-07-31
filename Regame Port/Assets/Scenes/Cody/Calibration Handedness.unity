@@ -970,6 +970,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab289330d55133441bc850669691ca98, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  reportFileName: Data.csv
 --- !u!4 &162347397
 Transform:
   m_ObjectHideFlags: 0
@@ -4499,7 +4500,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 687096302}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.546, y: -0.188, z: 1.671}
+  m_LocalPosition: {x: -0.016, y: 1.363, z: 1.987}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1652398045}
@@ -4530,7 +4531,7 @@ VideoPlayer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 717877834}
   m_Enabled: 1
-  m_VideoClip: {fileID: 32900000, guid: 46d3a761cbd108d488f808478ee0934a, type: 3}
+  m_VideoClip: {fileID: 32900000, guid: 229894d16ca83124b9e846ff25628e72, type: 3}
   m_TargetCameraAlpha: 1
   m_TargetCamera3DLayout: 0
   m_TargetCamera: {fileID: 0}
@@ -8929,11 +8930,12 @@ MonoBehaviour:
   accuracyChecker: {fileID: 1729888956981284944}
   throwCounter: {fileID: 1607603776}
   throwCounterUI: {fileID: 760123409}
-  totalPracticeThrows: 1
+  totalPracticeThrows: 10
   levelDifficulty: {fileID: 221726937}
   logTestResults: {fileID: 1437774430}
   platform: {fileID: 1543874918}
   projectileManager: {fileID: 956145689}
+  buttonPanel: {fileID: 1256379181}
   one: 0
   two: 0
   three: 0
@@ -9060,18 +9062,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 985db3004aec7744689e564a5fb2a19e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levels:
-  - one
-  - two
-  - three
-  - four
-  - five
   buttons:
-  - {fileID: 1096812403}
-  - {fileID: 1948236764}
-  - {fileID: 1039061107}
-  - {fileID: 350719984}
-  - {fileID: 331906570}
+  - {fileID: 1096812410}
+  - {fileID: 1948236771}
+  - {fileID: 1039061114}
+  - {fileID: 350719991}
+  - {fileID: 331906577}
+  gameplay: {fileID: 1725027594}
 --- !u!54 &1256379182
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -10368,8 +10365,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eea892b2b710c0e41aeb8c5e6e4b6d3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buttonPanel: {fileID: 1586533573}
+  buttonPanelObject: {fileID: 1586533573}
   levelCompletionParent: {fileID: 1299902385}
+  levelCompletionText: {fileID: 1024156489}
   percentagePanel: {fileID: 1457550937}
   instructionsPanel: {fileID: 1155115765}
   target: {fileID: 1115368978}
@@ -10379,6 +10377,7 @@ MonoBehaviour:
   totalTimeToActivation: 1
   renderer: {fileID: 1375302019}
   audioSource: {fileID: 1143399673}
+  buttonPanel: {fileID: 1256379181}
 --- !u!1 &1376283391
 GameObject:
   m_ObjectHideFlags: 0
@@ -13273,7 +13272,7 @@ MonoBehaviour:
   instructionsText: {fileID: 1822904202}
   percentageOfThrows: {fileID: 0}
   remainingThrows: {fileID: 760123409}
-  totalThrowsAllowedPerLevel: 1
+  totalThrowsAllowedPerLevel: 30
   accuracyChecker: {fileID: 1729888956981284944}
   buttons:
   - {fileID: 1096812410}
@@ -13298,6 +13297,7 @@ MonoBehaviour:
   hasCompletedFinalLevel: 0
   numOfFinalRounds: 0
   totalLevelCount: 0
+  gameplayPanelText: {fileID: 1024156489}
 --- !u!1001 &1742292157
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14220,9 +14220,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 11400002, guid: ce816f2e6abb0504092c23ed9b970dfd, type: 3}
       propertyPath: _trackingOriginType
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 11414578, guid: ce816f2e6abb0504092c23ed9b970dfd, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11493974, guid: ce816f2e6abb0504092c23ed9b970dfd, type: 3}
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
