@@ -20,8 +20,10 @@ public class GameplayTrigger : MonoBehaviour
     private float time = 0.0f;
     public float totalTimeToActivation = 0.0f;
     public MeshRenderer renderer;
+    public Collider collider;
     public AudioSource audioSource;
     public ButtonPanel buttonPanel;
+    public AudioManager audioManager;
 
     private void OnTriggerStay(Collider other)
     {
@@ -48,6 +50,11 @@ public class GameplayTrigger : MonoBehaviour
                 audioSource.Play();
                 levelCompletionText.text = "Nice Work!" +
                                            " Please take off your headset to talk to the researcher.";
+                
+                
+                //this.gameObject.SetActive(false);
+                collider.enabled = false;
+                renderer.enabled = false;
                 return;
             }
             
@@ -59,12 +66,17 @@ public class GameplayTrigger : MonoBehaviour
                 levelCompletionParent.SetActive(false);
                 percentagePanel.SetActive(false);
                 instructionsPanel.SetActive(true);
+                
+                LevelDetectionSwitch();
+                
                 target.SetActive(true);
                 audioSource.Play();
                 levelCompletionText.text = "Nice Work!" +
                                            " Please take off your headset to talk to the researcher.";
-
+                
+                
                 buttonPanel.ButtonSwitch();
+                this.gameObject.SetActive(false);
             }
         }
 
@@ -88,6 +100,11 @@ public class GameplayTrigger : MonoBehaviour
                 audioSource.Play();
                 levelCompletionText.text = "Nice Work!" +
                                            " Please take off your headset to talk to the researcher.";
+                
+                
+                //this.gameObject.SetActive(false);
+                collider.enabled = false;
+                renderer.enabled = false;
                 return;
             }
             
@@ -98,14 +115,53 @@ public class GameplayTrigger : MonoBehaviour
                 levelCompletionParent.SetActive(false);
                 percentagePanel.SetActive(false);
                 instructionsPanel.SetActive(true);
+                
+                LevelDetectionSwitch();
+                
                 target.SetActive(true);
                 audioSource.Play();
                 levelCompletionText.text = "Nice Work!" +
                                            " Please take off your headset to talk to the researcher.";
                 
+                //audioManager.PlayAudio(5);
                 buttonPanel.ButtonSwitch();
+                
+                this.gameObject.SetActive(false);
             }
         }
+    }
+
+    private void LevelDetectionSwitch()
+    {
+        if (!gameplay.hasCompletedFinalLevel)
+        {
+            switch (gameplay.totalLevelCount)
+            {
+                case 1: 
+                    audioManager.PlayAudio(5);
+                    Debug.Log("Played Green");
+                    break;
+                case 2:
+                    audioManager.PlayAudio(6);
+                    Debug.Log("Played Red");
+                    break;
+                case 3:
+                    audioManager.PlayAudio(7);
+                    Debug.Log("Played Yellow");
+                    break;
+                case 4: 
+                    audioManager.PlayAudio(8);
+                    Debug.Log("Played Orange");
+                    break;
+                case 5:
+                    audioManager.PlayAudio(10);
+                    Debug.Log("Played Final Round");
+                    break;
+                default:
+                    break;
+            }
+        }
+
     }
 
     public void ResetTrigger()

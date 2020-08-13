@@ -27,6 +27,12 @@ public class LevelDifficulty : MonoBehaviour
     private GameObject _obstacle;
     public TextMeshProUGUI instructionsPanel;
     public Gameplay gameplay;
+    public AudioManager AudioManager;
+    public bool hasPlayedGreen = false;
+    public bool hasPlayedYellow = false;
+    public bool hasPlayedRed = false;
+    public bool hasPlayedOrange = false;
+    public bool hasPlayedLastRound = false;
     
 
 

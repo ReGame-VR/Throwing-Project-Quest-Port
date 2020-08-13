@@ -22,6 +22,7 @@ public class Gameplay : MonoBehaviour
     public bool levelActivated = false;
     public LevelDifficulty levelDifficulty;
     public GameObject gameplayPanel;
+    public GameObject gameplayTriggerObject;
     public GameplayTrigger gameplayTrigger;
     public GameObject percentagePanel;
     public GameObject instructionsPanel;
@@ -37,6 +38,10 @@ public class Gameplay : MonoBehaviour
     private bool gameComplete = false;
     public int totalLevelCount = 0;
     public TextMeshProUGUI gameplayPanelText;
+    public bool hasPlayedBlue = false;
+    public bool hasPlayedRemoveHeadsest = false;
+    public bool hasPlayedWhiteCircle = false;
+    public AudioManager audioManager;
 
 
     // Start is called before the first frame update
@@ -45,6 +50,12 @@ public class Gameplay : MonoBehaviour
         accuracyChecker.ResetTotalThrows();
         buttonPanel.SetActive(true);
         instructionsText.text = "Great! Now we are ready to start the game. You have 30 chances to throw the ball. Try to get it in the basket! Press the blue button to start this level.";
+        if (!hasPlayedBlue)
+        {
+            audioManager.PlayAudio(3);
+            Debug.Log("Played 3");
+            hasPlayedBlue = true;
+        }
         buttonsPressedTotal = 0;
         
         OVRManager.HMDMounted += HandleHMDMounted;
@@ -124,6 +135,14 @@ public class Gameplay : MonoBehaviour
         instructionsPanel.SetActive(false);
         gameplayTrigger.ResetTrigger();
         gameplayPanel.SetActive(true);
+        
+        if (!hasPlayedRemoveHeadsest)
+        {
+            audioManager.PlayAudio(4);
+            Debug.Log("Played 4");
+            hasPlayedRemoveHeadsest = true;
+        }
+        
         percentagePanel.SetActive(true);
         GetAccuracvPercentage();
         percentageText.text = "You got " + accuracyChecker.numHit + "/" + (accuracyChecker.numMiss + accuracyChecker.numHit) + " throws into the basket!";
@@ -148,6 +167,13 @@ public class Gameplay : MonoBehaviour
         accuracyChecker.ResetTotalThrows();
         pm.buttonActivator = false;
         AddLevelCount();
+        
+        if (!hasPlayedRemoveHeadsest)
+        {
+            audioManager.PlayAudio(4);
+            Debug.Log("Played 4");
+            hasPlayedRemoveHeadsest = true;
+        }
     }
     
     public int NumLevelsCompleted()
@@ -193,9 +219,26 @@ public class Gameplay : MonoBehaviour
 
     public void HandleHMDMounted()
     {
+        if (gameComplete)
+            return;
+        
         if (levelComplete)
         {
+            gameplayTriggerObject.SetActive(true);
             gameplayPanelText.text = "Please touch the white circle when you are ready to begin again!";
+            hasPlayedRemoveHeadsest = false;
+            
+            if (!hasPlayedWhiteCircle)
+            {
+                audioManager.PlayAudio(9);
+                Debug.Log("Played 9");
+                hasPlayedWhiteCircle = true;
+            }
+
+            gameplayTrigger.collider.enabled = true;
+            gameplayTrigger.renderer.enabled = true;
+
+            hasPlayedWhiteCircle = false;
         }
     }
 }

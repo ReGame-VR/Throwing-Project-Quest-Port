@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -28,19 +29,29 @@ public class TutorialManager : MonoBehaviour
     public GameObject platform;
     public ProjectileManager projectileManager;
     public ButtonPanel buttonPanel;
+    [SerializeField] private AudioManager audioManager;
+    public bool hasPlayedCalibration = false;
+    public bool hasPlayedPractice = false;
+    public bool hasPlayedVideo = false;
+    private float waitOnStart = 2f;
 
-    public bool one = false;
-    public bool two = false;
-    public bool three = false;
-    public bool four = false;
-    public bool five = false;
-
+    private void Start()
+    {
+        StartCoroutine(WaitOnStart());
+    }
 
     // Update is called once per frame
     void Update()
     {
         if (globalControl.handCheck && !globalControl.hasWatchedInstructions)
         {
+            if (!hasPlayedVideo)
+            {
+                audioManager.PlayAudio(1);
+                Debug.Log("Played 1");
+                hasPlayedVideo = true;
+            }
+            
             handSelection.SetActive(false);
             videoDisplay.SetActive(true);
             videoInstructions.SetActive(true);
@@ -54,6 +65,14 @@ public class TutorialManager : MonoBehaviour
         if (globalControl.handCheck && globalControl.hasWatchedInstructions && !globalControl.hasCalibrated)
         {
             instructionsText.text = "Before we practice, lets calibrate your height! Put your arm out to your side and press the button.";
+            
+            if (!hasPlayedVideo)
+            {
+                audioManager.PlayAudio(2);
+                Debug.Log("Played 2");
+                hasPlayedVideo = true;
+            }
+
             heightCalibration.SetActive(true);
             levelScaler.SetActive(true);
             target.SetActive(true);
@@ -62,6 +81,14 @@ public class TutorialManager : MonoBehaviour
         if (globalControl.handCheck && globalControl.hasWatchedInstructions && globalControl.hasCalibrated)
         {
             instructionsText.text = "Let’s practice a few throws! Pick up the ball by pulling the trigger. Let go of the trigger while you throw the ball.";
+            
+            if (!hasPlayedPractice)
+            {
+                audioManager.PlayAudio(2);
+                Debug.Log("Played 2");
+                hasPlayedPractice = true;
+            }
+
             throwCounter.SetActive(true);
 
             if (!testResultsWritten)
@@ -91,6 +118,17 @@ public class TutorialManager : MonoBehaviour
                 int throwsLeft = totalPracticeThrows - total;
                 throwCounterUI.text = "You have " + throwsLeft.ToString() + " left!";
             }
+        }
+    }
+
+    private IEnumerator WaitOnStart()
+    {
+        yield return new WaitForSeconds(waitOnStart);
+        if (!hasPlayedCalibration)
+        {
+            audioManager.PlayAudio(0);
+            Debug.Log("Played 0");
+            hasPlayedCalibration = true;
         }
     }
 }
