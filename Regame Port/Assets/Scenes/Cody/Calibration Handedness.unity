@@ -1352,7 +1352,7 @@ MonoBehaviour:
   obstacleLocation: {fileID: 687096303}
   startPos: {fileID: 0}
   endPos: {fileID: 0}
-  AdjustableTargetPercent: 1.1
+  AdjustableTargetPercent: 1.05
   AdjustableObjectPercent: 0.75
   obstacleSpeed: 1
   globalControl: {fileID: 1652398044}
@@ -12682,7 +12682,7 @@ MonoBehaviour:
   height: 0
   armLength: 0
   platformOffset: 0.12
-  multiplier: 2.5
+  multiplier: 2
   targetOffset: 2.6
   isRightHanded: 1
   handCheck: 0

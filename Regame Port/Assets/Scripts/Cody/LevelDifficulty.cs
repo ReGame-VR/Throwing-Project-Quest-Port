@@ -99,9 +99,9 @@ public class LevelDifficulty : MonoBehaviour
 
     public void LevelThree()
     {
-        ResetTargetPosition();
         ResetTargetSize();
         AdjustTargetSize(AdjustableObjectPercent);
+        ResetTargetPosition();
         globalControl.currentLevel = "3";
         
         instructionsPanel.text = !gameplay.hasCompletedFinalLevel ? "Press the yellow button to start this level." : "TEST";
@@ -113,7 +113,6 @@ public class LevelDifficulty : MonoBehaviour
         //Reset positions and size for reference
         ResetTargetPosition();
         ResetTargetSize();
-
         MoveTarget();
         AdjustTargetSize(AdjustableObjectPercent);
         globalControl.currentLevel = "4";
