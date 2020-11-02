@@ -1,4 +1,4 @@
-# RegamePort
+# Throwing project for Oculus Quest (Port) 
 Throwing project for Oculus Quest (Port) 
 
 If you want to make any changes you will most likely use these three scripts.
