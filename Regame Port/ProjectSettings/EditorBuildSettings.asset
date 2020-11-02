@@ -6,6 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Cody/Calibration Handedness.unity
+    path: Assets/Scenes/Cody/FinalPort.unity
     guid: 3d74eb2823824be46aa8684ced009d6c
   m_configObjects: {}
