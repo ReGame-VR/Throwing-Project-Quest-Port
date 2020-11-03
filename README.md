@@ -1,6 +1,6 @@
 # Throwing project for Oculus Quest (Port) 
-Throwing project for Oculus Quest (Port) 
 
+Unity Version: 2019.1.1f1
 If you want to make any changes you will most likely use these three scripts.
 
 - LevelDifficuly.cs
