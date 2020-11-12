@@ -22,10 +22,10 @@ Remember to restart your Oculus Quest after a session otherwise the data will no
 If for any reason you want to reset the participant ID count on the data sheet, go to GlobalControl.cs and call the method FlushIDSystem() in awake/start.
 This will clear out the player preferences and restart the count. Make sure you have a copy of your data before you do this just in case.
 
-Color hex codes used for each level:
+Color hex codes used for each level:</br>
 
-Blue (level 1) - #0020FF
-Green (level 2) - #56FF00
-Red (level 3) - #FF0000
-Yellow (level 4) - #FCFF00
-Orange (level 5) - #FFA500
+Blue (level 1) - #0020FF</br>
+Green (level 2) - #56FF00</br>
+Red (level 3) - #FF0000</br>
+Yellow (level 4) - #FCFF00</br>
+Orange (level 5) - #FFA500</br>
