@@ -93,8 +93,11 @@ public class AccuracyChecker : MonoBehaviour
 
             //groundChecker.hasBeenGrabbed = false;
 
+            /*data = csvManager.DataInputToArray(globalControl.participantID, System.DateTime.Now.ToString("d"),
+                System.DateTime.Now.ToString("hh:mm:ss"), globalControl.currentLevel, TotalThrows().ToString(), distAway.ToString(), "Yes");*/
+            
             data = csvManager.DataInputToArray(globalControl.participantID, System.DateTime.Now.ToString("d"),
-                System.DateTime.Now.ToString("hh:mm:ss"), globalControl.currentLevel, TotalThrows().ToString(), distAway.ToString(), "Yes");
+                System.DateTime.Now.ToString("hh:mm:ss"), globalControl.currentLevel, TotalThrows().ToString(), "", "Yes");
             
             csvManager.AppendToReport(data);
         }
