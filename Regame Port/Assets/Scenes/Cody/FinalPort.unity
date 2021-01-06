@@ -8949,7 +8949,7 @@ MonoBehaviour:
   accuracyChecker: {fileID: 1729888956981284944}
   throwCounter: {fileID: 1607603776}
   throwCounterUI: {fileID: 760123409}
-  totalPracticeThrows: 1
+  totalPracticeThrows: 10
   levelDifficulty: {fileID: 221726937}
   logTestResults: {fileID: 1437774430}
   platform: {fileID: 1543874918}
@@ -13292,7 +13292,7 @@ MonoBehaviour:
   instructionsText: {fileID: 1822904202}
   percentageOfThrows: {fileID: 0}
   remainingThrows: {fileID: 760123409}
-  totalThrowsAllowedPerLevel: 1
+  totalThrowsAllowedPerLevel: 30
   accuracyChecker: {fileID: 1729888956981284944}
   buttons:
   - {fileID: 1096812410}

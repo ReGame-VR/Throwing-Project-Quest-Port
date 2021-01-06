@@ -69,7 +69,7 @@ public class LevelDifficulty : MonoBehaviour
     public void SpawnObstacle()
     {
         _obstacle = Instantiate(obstaclePrefab, obstacleLocation);
-        _obstacle.transform.position = target.transform.position / 2;
+        _obstacle.transform.position = new Vector3(target.transform.position.x/2, obstacleLocation.position.y, target.transform.position.z/2.5f);
     }
 
     public void DestroyObstacle()
@@ -117,7 +117,6 @@ public class LevelDifficulty : MonoBehaviour
 
     public void LevelFour()
     {
-        //Reset positions and size for reference
         ResetTargetPosition();
         ResetTargetSize();
         MoveTarget(levelFourModifier);
