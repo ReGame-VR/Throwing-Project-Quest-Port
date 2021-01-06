@@ -1353,7 +1353,7 @@ MonoBehaviour:
   startPos: {fileID: 0}
   endPos: {fileID: 0}
   AdjustableTargetPercent: 1.05
-  AdjustableObjectPercent: 0.75
+  AdjustableObjectPercent: 0.9
   obstacleSpeed: 1
   globalControl: {fileID: 1652398044}
   hasRecievedBaseline: 0
@@ -1365,6 +1365,11 @@ MonoBehaviour:
   hasPlayedRed: 0
   hasPlayedOrange: 0
   hasPlayedLastRound: 0
+  levelOneModifier: 1
+  levelTwoModifier: 1.025
+  levelThreeModifier: 1.025
+  levelFourModifier: 1.05
+  levelFiveModifier: 1.05
 --- !u!4 &221726938
 Transform:
   m_ObjectHideFlags: 0
@@ -7375,7 +7380,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 29678e1d7c6136842bf44e2aed970ef6, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 29678e1d7c6136842bf44e2aed970ef6, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -8944,7 +8949,7 @@ MonoBehaviour:
   accuracyChecker: {fileID: 1729888956981284944}
   throwCounter: {fileID: 1607603776}
   throwCounterUI: {fileID: 760123409}
-  totalPracticeThrows: 10
+  totalPracticeThrows: 1
   levelDifficulty: {fileID: 221726937}
   logTestResults: {fileID: 1437774430}
   platform: {fileID: 1543874918}
@@ -13287,7 +13292,7 @@ MonoBehaviour:
   instructionsText: {fileID: 1822904202}
   percentageOfThrows: {fileID: 0}
   remainingThrows: {fileID: 760123409}
-  totalThrowsAllowedPerLevel: 30
+  totalThrowsAllowedPerLevel: 1
   accuracyChecker: {fileID: 1729888956981284944}
   buttons:
   - {fileID: 1096812410}

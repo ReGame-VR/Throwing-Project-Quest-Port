@@ -33,6 +33,11 @@ public class LevelDifficulty : MonoBehaviour
     public bool hasPlayedRed = false;
     public bool hasPlayedOrange = false;
     public bool hasPlayedLastRound = false;
+    public float levelOneModifier;
+    public float levelTwoModifier;
+    public float levelThreeModifier;
+    public float levelFourModifier;
+    public float levelFiveModifier;
     
 
 
@@ -45,14 +50,15 @@ public class LevelDifficulty : MonoBehaviour
         }
     }
 
-    public void MoveTarget()
+    public void MoveTarget(float adjuster)
     {
-        target.transform.position = new Vector3(target.transform.position.x, target.transform.position.y, target.transform.position.z * AdjustableTargetPercent);
+        target.transform.position = new Vector3(target.transform.position.x, target.transform.position.y, target.transform.position.z * adjuster);
     }
 
     public void AdjustTargetSize(float reductionPercent)
     {
         target.transform.localScale = Vector3.one * reductionPercent;
+        transform.position = Vector3.zero;
     }
 
     public void AdjustObjectSize(float reductionPercent)
@@ -63,6 +69,7 @@ public class LevelDifficulty : MonoBehaviour
     public void SpawnObstacle()
     {
         _obstacle = Instantiate(obstaclePrefab, obstacleLocation);
+        _obstacle.transform.position = target.transform.position / 2;
     }
 
     public void DestroyObstacle()
@@ -82,6 +89,7 @@ public class LevelDifficulty : MonoBehaviour
     {
         ResetTargetPosition();
         ResetTargetSize();
+        MoveTarget(levelOneModifier);
         globalControl.currentLevel = "1";
         instructionsPanel.text = !gameplay.hasCompletedFinalLevel ? "Press the green button to start this level." : "TEST";
     }
@@ -90,8 +98,7 @@ public class LevelDifficulty : MonoBehaviour
     {
         ResetTargetPosition();
         ResetTargetSize();
-
-        MoveTarget();
+        MoveTarget(levelTwoModifier);
         globalControl.currentLevel = "2";
 
         instructionsPanel.text = !gameplay.hasCompletedFinalLevel ? "Press the red button to start this level." : "TEST";
@@ -102,8 +109,8 @@ public class LevelDifficulty : MonoBehaviour
         ResetTargetSize();
         AdjustTargetSize(AdjustableObjectPercent);
         ResetTargetPosition();
+        MoveTarget(levelThreeModifier);
         globalControl.currentLevel = "3";
-        
         instructionsPanel.text = !gameplay.hasCompletedFinalLevel ? "Press the yellow button to start this level." : "TEST";
         
     }
@@ -113,7 +120,7 @@ public class LevelDifficulty : MonoBehaviour
         //Reset positions and size for reference
         ResetTargetPosition();
         ResetTargetSize();
-        MoveTarget();
+        MoveTarget(levelFourModifier);
         AdjustTargetSize(AdjustableObjectPercent);
         globalControl.currentLevel = "4";
         
@@ -124,8 +131,7 @@ public class LevelDifficulty : MonoBehaviour
     {
         ResetTargetPosition();
         ResetTargetSize();
-
-        MoveTarget();
+        MoveTarget(levelFiveModifier);
         AdjustTargetSize(AdjustableObjectPercent);
         SpawnObstacle();
         globalControl.currentLevel = "5";
