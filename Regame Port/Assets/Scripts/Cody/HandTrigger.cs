@@ -1,23 +1,15 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Analytics;
 
-public class HandCalibration : MonoBehaviour
+public class HandTrigger : MonoBehaviour
 {
-    public GlobalControl globalControl;
     private float time = 0;
     public float totalTimeToActivation = 0.0f;
     public MeshRenderer renderer;
-    public AudioSource audioSource;
-    public TutorialManager tutorialManager;
-
-    private void Awake()
-    {
-        tutorialManager.audioManager.PlayAudio(0);
-    }
-
+    public GameObject parent;
+    public GameObject handCalibration;
+    
     private void OnTriggerStay(Collider other)
     {
         if (other.transform.parent == null)
@@ -32,9 +24,8 @@ public class HandCalibration : MonoBehaviour
             if (time > totalTimeToActivation)
             {
                 OVRInput.SetControllerVibration(0.0f,0.0f, OVRInput.Controller.LTouch);
-                globalControl.isRightHanded = false;
-                globalControl.handCheck = true;
-                audioSource.Play();
+                handCalibration.SetActive(true);
+                parent.SetActive(false);
             }
         }
 
@@ -47,9 +38,8 @@ public class HandCalibration : MonoBehaviour
             if (time > totalTimeToActivation)
             {
                 OVRInput.SetControllerVibration(0.0f,0.0f, OVRInput.Controller.RTouch);
-                globalControl.isRightHanded = true;
-                globalControl.handCheck = true;
-                audioSource.Play();
+                handCalibration.SetActive(true);
+                parent.SetActive(false);
             }
         }
     }

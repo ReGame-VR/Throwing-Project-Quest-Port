@@ -29,7 +29,7 @@ public class TutorialManager : MonoBehaviour
     public GameObject platform;
     public ProjectileManager projectileManager;
     public ButtonPanel buttonPanel;
-    [SerializeField] private AudioManager audioManager;
+    public AudioManager audioManager;
     public bool hasPlayedCalibration = false;
     public bool hasPlayedPractice = false;
     public bool hasPlayedVideo = false;
@@ -37,7 +37,7 @@ public class TutorialManager : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine(WaitOnStart());
+        //StartCoroutine(WaitOnStart());
     }
 
     // Update is called once per frame
@@ -48,7 +48,7 @@ public class TutorialManager : MonoBehaviour
             if (!hasPlayedVideo)
             {
                 audioManager.PlayAudio(1);
-                Debug.Log("Played 1");
+                //Debug.Log("Played 1");
                 hasPlayedVideo = true;
             }
             
@@ -69,7 +69,7 @@ public class TutorialManager : MonoBehaviour
             if (!hasPlayedVideo)
             {
                 audioManager.PlayAudio(2);
-                Debug.Log("Played 2");
+                //Debug.Log("Played 2");
                 hasPlayedVideo = true;
             }
 
@@ -85,7 +85,7 @@ public class TutorialManager : MonoBehaviour
             if (!hasPlayedPractice)
             {
                 audioManager.PlayAudio(2);
-                Debug.Log("Played 2");
+                //Debug.Log("Played 2");
                 hasPlayedPractice = true;
             }
 
@@ -127,7 +127,7 @@ public class TutorialManager : MonoBehaviour
         if (!hasPlayedCalibration)
         {
             audioManager.PlayAudio(0);
-            Debug.Log("Played 0");
+            //Debug.Log("Played 0");
             hasPlayedCalibration = true;
         }
     }

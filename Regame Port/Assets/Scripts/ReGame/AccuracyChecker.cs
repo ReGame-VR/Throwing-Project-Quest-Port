@@ -37,6 +37,7 @@ public class AccuracyChecker : MonoBehaviour
     public ProjectileManager projectileManager;
     public GlobalControl globalControl;
     public CSVManager csvManager;
+    public bool hasHitObstacle = false;
 
     // Start is called before the first frame update
     void Start()
@@ -72,7 +73,7 @@ public class AccuracyChecker : MonoBehaviour
         var groundChecker = otherGameobject.GetComponent<GroundChecker>();
         if (!groundChecker) return;
         
-        string[] data = new string[7];
+        string[] data = new string[9];
 
         if (groundChecker.tracking && otherGameobject.CompareTag("Projectile"))
         {
@@ -97,9 +98,11 @@ public class AccuracyChecker : MonoBehaviour
                 System.DateTime.Now.ToString("hh:mm:ss"), globalControl.currentLevel, TotalThrows().ToString(), distAway.ToString(), "Yes");*/
             
             data = csvManager.DataInputToArray(globalControl.participantID, System.DateTime.Now.ToString("d"),
-                System.DateTime.Now.ToString("hh:mm:ss"), globalControl.currentLevel, TotalThrows().ToString(), "", "Yes");
+                System.DateTime.Now.ToString("hh:mm:ss"), globalControl.currentLevel, TotalThrows().ToString(), "", hasHitObstacle.ToString(), "Yes");
             
             csvManager.AppendToReport(data);
+
+            ResetObstacleDetector();
         }
     }
 
@@ -118,11 +121,13 @@ public class AccuracyChecker : MonoBehaviour
             missAudio.Play();
         }
 
-        string[] data = new string[7];
+        string[] data = new string[9];
         data = csvManager.DataInputToArray(globalControl.participantID, System.DateTime.Now.ToString("d"),
-            System.DateTime.Now.ToString("hh:mm:ss"), globalControl.currentLevel, TotalThrows().ToString(), distAway.ToString(), "No");
+            System.DateTime.Now.ToString("hh:mm:ss"), globalControl.currentLevel, TotalThrows().ToString(), distAway.ToString(), hasHitObstacle.ToString(),"No");
 
         csvManager.AppendToReport(data);
+        
+        ResetObstacleDetector();
     }
     
 
@@ -140,5 +145,10 @@ public class AccuracyChecker : MonoBehaviour
     public float PercentageOfSuccess()
     {
         return (float)numHit / (float)(numHit + numMiss);
+    }
+
+    private void ResetObstacleDetector()
+    {
+        hasHitObstacle = false;
     }
 }
