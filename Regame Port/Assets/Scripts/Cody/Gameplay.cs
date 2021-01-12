@@ -42,6 +42,7 @@ public class Gameplay : MonoBehaviour
     public bool hasPlayedRemoveHeadsest = false;
     public bool hasPlayedWhiteCircle = false;
     public AudioManager audioManager;
+    public GameObject continueOrExit;
 
 
     // Start is called before the first frame update
@@ -167,6 +168,9 @@ public class Gameplay : MonoBehaviour
         accuracyChecker.ResetTotalThrows();
         pm.buttonActivator = false;
         AddLevelCount();
+
+        continueOrExit.SetActive(true);
+        
         
         if (!hasPlayedRemoveHeadsest)
         {
