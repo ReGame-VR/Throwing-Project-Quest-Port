@@ -38,6 +38,9 @@ public class LevelDifficulty : MonoBehaviour
     public float levelThreeModifier;
     public float levelFourModifier;
     public float levelFiveModifier;
+    public bool isTargetMoving = false;
+    public bool isObstacleMoving = false;
+    public Transform testTarget;
     
 
 
@@ -47,6 +50,17 @@ public class LevelDifficulty : MonoBehaviour
         {
             calibratedTargetPos = target.transform.position;
             hasRecievedBaseline = true;
+        }
+
+        if (isTargetMoving)
+        {
+            MoveObject(testTarget);
+        }
+
+        if (isObstacleMoving)
+        {
+            if(_obstacle)
+                MoveObject(_obstacle.transform);
         }
     }
 
@@ -80,13 +94,17 @@ public class LevelDifficulty : MonoBehaviour
         }
     }
 
-    public void MoveObstacle()
+    public void MoveObject(Transform objectToMove)
     {
-        obstaclePrefab.transform.position = Vector3.Lerp(startPos.position, endPos.position, (Mathf.Sin(obstacleSpeed * Time.time) + 1.0f) / 2.0f);
+        var leftPosition = new Vector3((objectToMove.localPosition.x - 1) / 10, objectToMove.localPosition.y, objectToMove.localPosition.z);
+        var rightPosition = new Vector3((objectToMove.localPosition.x + 1) / 10, objectToMove.localPosition.y, objectToMove.localPosition.z);
+        objectToMove.localPosition = Vector3.Lerp(leftPosition, rightPosition, (Mathf.Sin(obstacleSpeed * Time.time) + 1.0f) / 2.0f);
     }
 
     public void LevelOne()
     {
+        isTargetMoving = false;
+        isObstacleMoving = false;
         ResetTargetPosition();
         ResetTargetSize();
         MoveTarget(levelOneModifier);
@@ -96,6 +114,8 @@ public class LevelDifficulty : MonoBehaviour
 
     public void LevelTwo()
     {
+        isTargetMoving = false;
+        isObstacleMoving = false;
         ResetTargetPosition();
         ResetTargetSize();
         MoveTarget(levelTwoModifier);
@@ -110,6 +130,8 @@ public class LevelDifficulty : MonoBehaviour
         AdjustTargetSize(AdjustableObjectPercent);
         ResetTargetPosition();
         MoveTarget(levelThreeModifier);
+        isTargetMoving = true;
+        isObstacleMoving = false;
         globalControl.currentLevel = "3";
         instructionsPanel.text = !gameplay.hasCompletedFinalLevel ? "Press the yellow button to start this level." : "TEST";
         
@@ -117,10 +139,13 @@ public class LevelDifficulty : MonoBehaviour
 
     public void LevelFour()
     {
+        isTargetMoving = false;
+        isObstacleMoving = false;
         ResetTargetPosition();
         ResetTargetSize();
         MoveTarget(levelFourModifier);
         AdjustTargetSize(AdjustableObjectPercent);
+        SpawnObstacle();
         globalControl.currentLevel = "4";
         
         instructionsPanel.text = !gameplay.hasCompletedFinalLevel ? "Press the orange button to start this level." : "TEST";
@@ -133,6 +158,8 @@ public class LevelDifficulty : MonoBehaviour
         MoveTarget(levelFiveModifier);
         AdjustTargetSize(AdjustableObjectPercent);
         SpawnObstacle();
+        isTargetMoving = false;
+        isObstacleMoving = true;
         globalControl.currentLevel = "5";
         
         instructionsPanel.text = !gameplay.hasCompletedFinalLevel ? "This is the last part! Please touch the color that the researcher suggested." : "TEST";

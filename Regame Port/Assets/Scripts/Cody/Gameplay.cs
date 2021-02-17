@@ -43,6 +43,9 @@ public class Gameplay : MonoBehaviour
     public bool hasPlayedWhiteCircle = false;
     public AudioManager audioManager;
     public GameObject continueOrExit;
+    public GameObject playerPosition;
+    public Transform centerEyeAnchor;
+
 
 
     // Start is called before the first frame update
@@ -244,5 +247,14 @@ public class Gameplay : MonoBehaviour
 
             hasPlayedWhiteCircle = false;
         }
+        
+        ResetPosition();
+    }
+
+    public void ResetPosition()
+    {
+        var positionOffsetX = -centerEyeAnchor.localPosition.x;
+        var positionOffsetZ = -centerEyeAnchor.localPosition.z;
+        playerPosition.transform.position = new Vector3(positionOffsetX, playerPosition.transform.position.y, positionOffsetZ);
     }
 }
